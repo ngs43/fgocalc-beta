@@ -10,6 +10,7 @@ function keisan() {
     DMGdebuff = parseFloat(document.NP.DMGdebuff.value); CARDdebuff = parseFloat(document.NP.CARDdebuff.value);
 
     if (ATKbuff > 400) { ATKbuff = 400 };
+    if (ATKbuff < -100) { ATKbuff = -100 };
     if (DEFdebuff > 100) { DEFdebuff = 100 };
     if (CARDbuff > 400) { CARDbuff = 400 };
     if (sATKbuff > 1000) { sATKbuff = 1000 };
@@ -226,6 +227,7 @@ function keisan_DMG_normal() {
     if (A_CARDbuff_normal > 400) { A_CARDbuff_normal = 400 };
     if (B_CARDbuff_normal > 400) { B_CARDbuff_normal = 400 };
     if (ATKbuff_normal > 400) { ATKbuff_normal = 400 };
+    if (ATKbuff_normal < -100) { ATKbuff_normal = -100 };
     if (DEFdebuff_normal > 100) { DEFdebuff_normal = 100 };
     if (sATKbuff_normal > 1000) { sATKbuff_normal = 1000 };
     if (sDEFdebuff_normal > 500) { sDEFdebuff_normal = 500 };
