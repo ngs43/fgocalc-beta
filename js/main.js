@@ -18,10 +18,13 @@ function keisan() {
     // if (CARDdebuff > 100) { CARDdebuff = 100 };
 
     total1 = Math.round(100 * (ATK * NPmu / 100
-        * 0.23 * card * (100 + CARDbuff + CARDdebuff) / 100
-        * class1 * class2 * elemental
+        * 0.23 * card
+        * (100 + CARDbuff + CARDdebuff) / 100
+        * class1
+        * class2
+        * elemental
         * (100 + ATKbuff + DEFdebuff) / 100
-        * (100 + sATKbuff + sDEFdebuff + NPbuff) / 100
+        * Math.max((100 + sATKbuff + sDEFdebuff + NPbuff), 0.1) / 100
         * sNPbuff1 / 100 * sNPbuff2 / 100));
 
     document.NP.total1.value = Math.floor(total1 / 100) + DMGbuff + DMGdebuff;
@@ -168,9 +171,18 @@ function keisan_rate() {
 function keisan_DMG(ATK_normal, Bbonus_normal, CARDbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal, random, ATKbuff_normal, DEFdebuff_normal, Cri_normal,
     EXbonus_normal, sATKbuff_normal, sDEFdebuff_normal, Cribuff_normal, Cri_is, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_normal) {
     var DMG;
-    DMG = 10 * (ATK_normal * 0.23 * (Bbonus_normal / 100 * (100 + CARDbuff_normal + CARDdebuff_normal) / 100 + Bbonus_all_normal / 100) * class1_normal * class2_normal * elemental_normal * random
-        * (100 + ATKbuff_normal + DEFdebuff_normal) / 100 * Cri_normal * EXbonus_normal / 100 * (100 + sATKbuff_normal + sDEFdebuff_normal + Cribuff_normal * Cri_is) / 100
-        + ATK_normal * Bchain_bonus_normal / 100);
+    DMG = 10 * (ATK_normal * 0.23 *
+        (Bbonus_normal / 100 * (100 + CARDbuff_normal + CARDdebuff_normal) / 100 + Bbonus_all_normal / 100)
+        * class1_normal // クラス相性
+        * class2_normal // クラス補正
+        * elemental_normal // Attri相性
+        * random // 乱数
+        * (100 + ATKbuff_normal + DEFdebuff_normal) / 100 // 攻撃バフ防御デバフ
+        * Cri_normal // クリティカルの有無
+        * EXbonus_normal / 100
+        * Math.max((100 + sATKbuff_normal + sDEFdebuff_normal + Cribuff_normal * Cri_is), 0.1) / 100
+        + ATK_normal * Bchain_bonus_normal / 100
+    );
     DMG = Math.floor(DMG / 10) + DMGbuff_normal + DMGdebuff_normal;
     return DMG;
 };
