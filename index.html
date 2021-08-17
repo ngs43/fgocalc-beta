@@ -114,7 +114,7 @@
                 <br><br>
                 <div class="damage">
                     <h2>宝具ダメージ計算</h2><br>
-                    <br>
+
 
                     <form name="NP" class="NP">
                         ATK：<input type="number" name="ATK" min="0" step="500" style="width:60px;"><br>
@@ -137,6 +137,8 @@
                         ダメージ バフ：<input type="number" name="DMGbuff" value="0" min="0" step="100"
                             style="width:50px;"><br>
                         敵ダメージ デバフ：<input type="number" name="DMGdebuff" value="0" min="0" step="100"
+                            style="width:50px;"><br>
+                        敵特殊耐性：<input type="number" name="sDEF" value="0" min="-100" step="100"
                             style="width:50px;"><br><br>
                         クラス相性：
                         <select name="class1">
@@ -187,7 +189,7 @@
                 </div>
 
                 <div class="damage_normal">
-                    <h2>通常ダメージ計算</h2><br>
+                    <h2>通常ダメージ計算</h2>
                     <br>
 
                     <form name="DMG_normal" class="DMG_normal">
@@ -220,6 +222,8 @@
                             ダメージ バフ：<input type="number" name="DMGbuff_normal" value="0" min="0" step="100"
                                 style="width:50px;"><br>
                             敵ダメージ デバフ：<input type="number" name="DMGdebuff_normal" value="0" min="0" step="100"
+                                style="width:50px;"><br>
+                            敵特殊耐性：<input type="number" name="sDEF_normal" value="0" min="-100" step="100"
                                 style="width:50px;"><br><br>
                             クラス相性：
                             <select name="class1_normal">
