@@ -193,7 +193,7 @@ function keisan_DMG_normal() {
         elemental_normal, ATKbuff_normal, DEFdebuff_normal, sATKbuff_normal, sDEFdebuff_normal, DMGbuff_normal, DMGdebuff_normal, total1, total2, total3,
         Bbonus_1st_normal, Bbonus_2nd_normal, Bbonus_3rd_normal, Bbonus_EX_normal, EXbonus_normal, Bbonus_all_normal, Bchain_bonus_normal,
         CARDbuff_1st_normal, CARDbuff_2nd_normal, CARDbuff_3rd_normal, Cribuff_normal, Q_CARDdebuff_normal, A_CARDdebuff_normal, B_CARDdebuff_normal,
-        CARDdebuff_1st_normal, CARDdebuff_2nd_normal, CARDdebuff_3rd_normal,
+        CARDdebuff_1st_normal, CARDdebuff_2nd_normal, CARDdebuff_3rd_normal, EXATKbuff_normal,
         is_card_1st_Cri, is_card_2nd_Cri, is_card_3rd_Cri,
         DMG_ave_1st, DMG_ave_2nd, DMG_ave_3rd, DMG_ave_EX,
         DMG_high_1st, DMG_high_2nd, DMG_high_3rd, DMG_high_EX,
@@ -221,6 +221,7 @@ function keisan_DMG_normal() {
     Q_CARDdebuff_normal = parseFloat(document.DMG_normal.Q_CARDdebuff_normal.value);
     A_CARDdebuff_normal = parseFloat(document.DMG_normal.A_CARDdebuff_normal.value);
     B_CARDdebuff_normal = parseFloat(document.DMG_normal.B_CARDdebuff_normal.value);
+    EXATKbuff_normal = parseFloat(document.DMG_normal.EXATKbuff_normal.value)
 
 
     if (Q_CARDbuff_normal > 400) { Q_CARDbuff_normal = 400 };
@@ -287,15 +288,15 @@ function keisan_DMG_normal() {
         1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
         sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal);
     // document.DMG_normal.DMG_high_3rd.value = DMG_high_3rd;
-    DMG_ave_EX = keisan_DMG(ATK_normal, 100, 0, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+    DMG_ave_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
         sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, 0, 0);
     // document.DMG_normal.DMG_ave_EX.value = DMG_ave_EX;
-    DMG_low_EX = keisan_DMG(ATK_normal, 100, 0, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+    DMG_low_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
         sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, 0, 0);
     // document.DMG_normal.DMG_low_EX.value = DMG_low_EX;
-    DMG_high_EX = keisan_DMG(ATK_normal, 100, 0, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+    DMG_high_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
         sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, 0, 0);
     // document.DMG_normal.DMG_high_EX.value = DMG_high_EX;
