@@ -1,0 +1,18 @@
+#pageTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}
+ 
+#pageTop a {
+  opacity:0.4;
+  background-color: #50a0ff;
+  width:45px;
+  height:45px;
+  display: block;
+  z-index: 999;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  text-align:center;
+}
