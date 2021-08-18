@@ -381,7 +381,7 @@
                 </div>
 
                 <div class="prob_calc">
-                    <h2>撃破率 計算</h2><br>
+                    <h2>撃破率 計算</h2>
                     <br>
 
                     <form name="prob_calc">
@@ -464,7 +464,7 @@
                 </div>
 
                 <div class="rate">
-                    <h2>NP・スター　計算</h2><br>
+                    <h2>NP・スター　計算</h2>
                     <br>
                     <form name="rate">
                         <div class="rate_data">
@@ -501,7 +501,9 @@
                             </select><br>
                             宝具ヒット数：<input type="number" name="NP_hit" value="1" min="0" step="1"
                                 style="width:40px;">Hit<br>
-                            敵補正：<input type="number" name="enemy_rate" value="100" min="0" step="10"
+                            NP 敵補正：<input type="number" name="enemy_rate_NP" value="100" min="0" step="10"
+                                style="width:40px;">％<br>
+                            スター 敵補正：<input type="number" name="enemy_rate_Star" value="0" step="5"
                                 style="width:40px;">％<br>
                         </div>
 
@@ -541,6 +543,25 @@
                                         </select>
                                     </th>
                                     <th></th>
+                                </tr>
+                                <tr>
+                                    <th style="height:40px" colspan="2">オーバーキル数</th>
+                                    <th>
+                                        <input type="number" name="OK_1st" value="0" min="0" step="1"
+                                            style="width:40px;">Hit<br>
+                                    </th>
+                                    <th>
+                                        <input type="number" name="OK_2nd" value="0" min="0" step="1"
+                                            style="width:40px;">Hit<br>
+                                    </th>
+                                    <th>
+                                        <input type="number" name="OK_3rd" value="0" min="0" step="1"
+                                            style="width:40px;">Hit<br>
+                                    </th>
+                                    <th>
+                                        <input type="number" name="OK_EX" value="0" min="0" step="1"
+                                            style="width:40px;">Hit<br>
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th rowspan="2" style="width:130px;">通常</th>
@@ -597,64 +618,6 @@
                                     </td>
                                     <td>
                                         <output type="number" name="Star_3rd_Cri"></output>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2">オーバーキル</th>
-                                    <th>NP獲得量</th>
-                                    <td>
-                                        <output type="number" name="NP_1st_OK"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_2nd_OK"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_3rd_OK"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_EX_OK"></output>％
-                                    </td>
-                                </tr>
-                                <tr class="Star">
-                                    <th>スター獲得量</th>
-                                    <td>
-                                        <output type="number" name="Star_1st_OK"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_2nd_OK"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_3rd_OK"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_EX_OK"></output>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2">クリティカル<br>＆<br>オーバーキル</th>
-                                    <th>NP獲得量</th>
-                                    <td>
-                                        <output type="number" name="NP_1st_CO"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_2nd_CO"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_3rd_CO"></output>％
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr class="Star">
-                                    <th>スター獲得量</th>
-                                    <td>
-                                        <output type="number" name="Star_1st_CO"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_2nd_CO"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_3rd_CO"></output>
                                     </td>
                                     <td></td>
                                 </tr>

@@ -45,10 +45,10 @@
   table.rate_result th {width:100px; padding:2px;}
   select.card {width:80px;}
   div.NP_Star output {width:55px; font-size:16px; text-align:center;}
-  tr.Star output {width:88px; font-size:14px; text-align:center; height:48px;}
+  tr.Star output {width:88px; font-size:14px; text-align:center; height:66px;}
   div.damage {margin:0px 0px 0px 0px; border:solid 4px #a0b0b0; padding:10px; height:600px;}
   div.rate {border:solid 4px #a0b0b0; padding:10px; height:660px; margin:30px 0px 0px 0px;}
-  div.prob_calc {margin:30px 0px 0px 0px; border:solid 4px #a0b0b0; padding:10px; height:410px;}
+  div.prob_calc {margin:30px 0px 0px 0px; border:solid 4px #a0b0b0; padding:10px; height:390px;}
   p.policy {font-size:20px; border:dotted 2px; padding:3px;}
   #policy_text {font-size:16px; line-height:1.5em;}
   #info {font-size:13px; border:solid 2px #b0e0ff;  margin:5px 0px 20px 0px; }

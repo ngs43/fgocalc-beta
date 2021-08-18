@@ -43,22 +43,28 @@ function keisan() {
 
 function keisan_NP(hit, N_A, Abonus, card_buff, Abonus_all, card_NP, enemy_rate, getNP_buff, Cri, OK, card_debuff) {
     var NP;
-    NP = 100 * (N_A * (Abonus / 100 * (100 + card_buff + card_debuff) / 100 + Abonus_all * card_NP / 100) * enemy_rate / 100 * (100 + getNP_buff) / 100 * Cri * OK);
-    NP = Math.round(NP * 10);
-    NP = Math.floor(NP / 10);
-    NP = hit * NP / 100;
+    NP = 100 * (N_A * (Abonus / 100 * (100 + card_buff + card_debuff) / 100 + Abonus_all * card_NP / 100) * enemy_rate / 100 * (100 + getNP_buff) / 100) * Cri;
+    // NP = Math.round(NP * 10);
+    // NP = Math.floor(NP / 10);
+    NP = Math.floor(NP);
+    NP = Math.floor((hit - OK) * NP + 1.5 * OK * NP) / 100;
     if (Cri == 2 && card_NP == 0) { NP = "" };
     return NP;
 };
 
 function keisan_Star(hit, Star_rate, Qbonus, card_buff, Qbonus_all, card_NP, getStar_buff, Cri, OK, card_debuff) {
     var Star, Star_num;
-    Star = 100 * (Star_rate / 100 + Qbonus / 100 * (100 + card_buff + card_debuff) / 100 + Qbonus_all * card_NP / 100 + getStar_buff / 100 + Cri / 100 + OK / 100);
-    Star = Math.round(Star * 100);
-    Star = Math.floor(Star / 10);
+    Star = 100 * (Star_rate / 100 + Qbonus / 100 * (100 + card_buff + card_debuff) / 100 + Qbonus_all * card_NP / 100 + getStar_buff / 100 + Cri / 100);
+    Star_OK = 100 * (Star_rate / 100 + Qbonus / 100 * (100 + card_buff + card_debuff) / 100 + Qbonus_all * card_NP / 100 + getStar_buff / 100 + Cri / 100 + 30 / 100);
+    Star = Math.floor(Star * 100);
+    Star = Math.floor(Star / 100) * 10;
     if (Star > 3000) { Star = 3000 };
     Star_num = Math.floor(Star / 1000);
-    Star = Star_num * hit + "個" + "+" + "(" + ((Star - 1000 * Star_num) / 10) + "％)×" + (hit);
+    Star_OK = Math.floor(Star_OK * 100);
+    Star_OK = Math.floor(Star_OK / 100) * 10;
+    if (Star_OK > 3000) { Star_OK = 3000 };
+    Star_OK_num = Math.floor(Star_OK / 1000);
+    Star = (Star_num * (hit - OK) + Star_OK_num * OK) + "個" + "+" + "(" + ((Star - 1000 * Star_num) / 10) + "%×" + (hit - OK) + ", " + ((Star_OK - 1000 * Star_OK_num) / 10) + "%×" + OK + ")";
     if (Cri == 20 && card_NP == 0) { Star = "" };
     return Star;
 };
@@ -67,7 +73,8 @@ function keisan_rate() {
     var card_1st, card_2nd, card_3rd, N_A, Q_hit, A_hit, B_hit, EX_hit, Qbonus_1st, Abonus_1st, Bbonus_1st, Q_CARDbuff, A_CARDbuff, B_CARDbuff, NPcard, NP_hit,
         Qbonus_all, Abonus_all, Qbonus_2nd, Abonus_2nd, Bbonus_2nd, Qbonus_3rd, Abonus_3rd, Bbonus_3rd, EXbonus,
         buff_1st, buff_2nd, buff_3rd, getNP_buff, hit_1st, hit_2nd, hit_3rd, NPcard_1st, NPcard_2nd, NPcard_3rd, card1st_NP, card2nd_NP, card3rd_NP,
-        Star_rate, getStar_buff, enemy_rate, Q_CARDdebuff, A_CARDdebuff, B_CARDdebuff, debuff_1st, debuff_2nd, debuff_3rd;
+        Star_rate, getStar_buff, enemy_rate_NP, enemy_rate_Star, Q_CARDdebuff, A_CARDdebuff, B_CARDdebuff, debuff_1st, debuff_2nd, debuff_3rd,
+        OK_1st, OK_2nd, OK_3rd, OK_EX;
     N_A = parseFloat(document.rate.N_A.value);
     card_1st = document.rate.card_1st.value;
     card_2nd = document.rate.card_2nd.value;
@@ -85,13 +92,18 @@ function keisan_rate() {
     NPcard = document.rate.NPcard.value;
     Star_rate = parseFloat(document.rate.Star_rate.value);
     getStar_buff = parseFloat(document.rate.getStar_buff.value);
-    enemy_rate = parseFloat(document.rate.enemy_rate.value);
+    enemy_rate_NP = parseFloat(document.rate.enemy_rate_NP.value);
+    enemy_rate_Star = parseFloat(document.rate.enemy_rate_Star.value);
     Q_CARDdebuff = parseFloat(document.rate.Q_CARDdebuff.value);
     A_CARDdebuff = parseFloat(document.rate.A_CARDdebuff.value);
     B_CARDdebuff = parseFloat(document.rate.B_CARDdebuff.value);
     card1st_NP = 1;
     card2nd_NP = 1;
     card3rd_NP = 1;
+    OK_1st = parseFloat(document.rate.OK_1st.value);
+    OK_2nd = parseFloat(document.rate.OK_2nd.value);
+    OK_3rd = parseFloat(document.rate.OK_3rd.value);
+    OK_EX = parseFloat(document.rate.OK_EX.value);
 
     if (Q_CARDbuff > 400) { Q_CARDbuff = 400 };
     if (A_CARDbuff > 400) { A_CARDbuff = 400 };
@@ -134,41 +146,41 @@ function keisan_rate() {
     if (card2nd_NP == 0) { hit_2nd = NP_hit };
     if (card3rd_NP == 0) { hit_3rd = NP_hit };
 
-    document.rate.NP_1st.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate, getNP_buff, 1, 1, debuff_1st);
-    document.rate.NP_2nd.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate, getNP_buff, 1, 1, debuff_2nd);
-    document.rate.NP_3rd.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate, getNP_buff, 1, 1, debuff_3rd);
-    document.rate.NP_EX.value = keisan_NP(EX_hit, N_A, 100, 0, Abonus_all, 1, enemy_rate, getNP_buff, 1, 1, 0);
+    document.rate.NP_1st.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate_NP, getNP_buff, 1, OK_1st, debuff_1st);
+    document.rate.NP_2nd.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate_NP, getNP_buff, 1, OK_2nd, debuff_2nd);
+    document.rate.NP_3rd.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate_NP, getNP_buff, 1, OK_3rd, debuff_3rd);
+    document.rate.NP_EX.value = keisan_NP(EX_hit, N_A, 100, 0, Abonus_all, 1, enemy_rate_NP, getNP_buff, 1, OK_EX, 0);
 
-    document.rate.NP_1st_Cri.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate, getNP_buff, 2, 1, debuff_1st);
-    document.rate.NP_2nd_Cri.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate, getNP_buff, 2, 1, debuff_2nd);
-    document.rate.NP_3rd_Cri.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate, getNP_buff, 2, 1, debuff_3rd);
+    document.rate.NP_1st_Cri.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate_NP, getNP_buff, 2, OK_1st, debuff_1st);
+    document.rate.NP_2nd_Cri.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate_NP, getNP_buff, 2, OK_2nd, debuff_2nd);
+    document.rate.NP_3rd_Cri.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate_NP, getNP_buff, 2, OK_3rd, debuff_3rd);
 
-    document.rate.NP_1st_OK.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate, getNP_buff, 1, 1.5, debuff_1st);
-    document.rate.NP_2nd_OK.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate, getNP_buff, 1, 1.5, debuff_2nd);
-    document.rate.NP_3rd_OK.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate, getNP_buff, 1, 1.5, debuff_3rd);
-    document.rate.NP_EX_OK.value = keisan_NP(EX_hit, N_A, 100, 0, Abonus_all, 1, enemy_rate, getNP_buff, 1, 1.5, 0);
+    // document.rate.NP_1st_OK.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate_NP, getNP_buff, 1, 1.5, debuff_1st);
+    // document.rate.NP_2nd_OK.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate_NP, getNP_buff, 1, 1.5, debuff_2nd);
+    // document.rate.NP_3rd_OK.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate_NP, getNP_buff, 1, 1.5, debuff_3rd);
+    // document.rate.NP_EX_OK.value = keisan_NP(EX_hit, N_A, 100, 0, Abonus_all, 1, enemy_rate_NP, getNP_buff, 1, 1.5, 0);
 
-    document.rate.NP_1st_CO.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate, getNP_buff, 2, 1.5, debuff_1st);
-    document.rate.NP_2nd_CO.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate, getNP_buff, 2, 1.5, debuff_2nd);
-    document.rate.NP_3rd_CO.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate, getNP_buff, 2, 1.5, debuff_3rd);
+    // document.rate.NP_1st_CO.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate_NP, getNP_buff, 2, 1.5, debuff_1st);
+    // document.rate.NP_2nd_CO.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate_NP, getNP_buff, 2, 1.5, debuff_2nd);
+    // document.rate.NP_3rd_CO.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate_NP, getNP_buff, 2, 1.5, debuff_3rd);
 
-    document.rate.Star_1st.value = keisan_Star(hit_1st, Star_rate, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 0, 0, debuff_1st);
-    document.rate.Star_2nd.value = keisan_Star(hit_2nd, Star_rate, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 0, 0, debuff_2nd);
-    document.rate.Star_3rd.value = keisan_Star(hit_3rd, Star_rate, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 0, 0, debuff_3rd);
-    document.rate.Star_EX.value = keisan_Star(EX_hit, Star_rate, 100, 0, Qbonus_all, 1, getStar_buff, 0, 0, 0);
+    document.rate.Star_1st.value = keisan_Star(hit_1st, Star_rate + enemy_rate_Star, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 0, OK_1st, debuff_1st);
+    document.rate.Star_2nd.value = keisan_Star(hit_2nd, Star_rate + enemy_rate_Star, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 0, OK_2nd, debuff_2nd);
+    document.rate.Star_3rd.value = keisan_Star(hit_3rd, Star_rate + enemy_rate_Star, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 0, OK_3rd, debuff_3rd);
+    document.rate.Star_EX.value = keisan_Star(EX_hit, Star_rate + enemy_rate_Star, 100, 0, Qbonus_all, 1, getStar_buff, 0, OK_EX, 0);
 
-    document.rate.Star_1st_Cri.value = keisan_Star(hit_1st, Star_rate, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 20, 0, debuff_1st);
-    document.rate.Star_2nd_Cri.value = keisan_Star(hit_2nd, Star_rate, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 20, 0, debuff_2nd);
-    document.rate.Star_3rd_Cri.value = keisan_Star(hit_3rd, Star_rate, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 20, 0, debuff_3rd);
+    document.rate.Star_1st_Cri.value = keisan_Star(hit_1st, Star_rate + enemy_rate_Star, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 20, OK_1st, debuff_1st);
+    document.rate.Star_2nd_Cri.value = keisan_Star(hit_2nd, Star_rate + enemy_rate_Star, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 20, OK_2nd, debuff_2nd);
+    document.rate.Star_3rd_Cri.value = keisan_Star(hit_3rd, Star_rate + enemy_rate_Star, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 20, OK_3rd, debuff_3rd);
 
-    document.rate.Star_1st_OK.value = keisan_Star(hit_1st, Star_rate, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 0, 30, debuff_1st);
-    document.rate.Star_2nd_OK.value = keisan_Star(hit_2nd, Star_rate, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 0, 30, debuff_2nd);
-    document.rate.Star_3rd_OK.value = keisan_Star(hit_3rd, Star_rate, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 0, 30, debuff_3rd);
-    document.rate.Star_EX_OK.value = keisan_Star(EX_hit, Star_rate, 100, 0, Qbonus_all, 1, getStar_buff, 0, 30, 0);
+    // document.rate.Star_1st_OK.value = keisan_Star(hit_1st, Star_rate + enemy_rate_Star, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 0, 30, debuff_1st);
+    // document.rate.Star_2nd_OK.value = keisan_Star(hit_2nd, Star_rate + enemy_rate_Star, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 0, 30, debuff_2nd);
+    // document.rate.Star_3rd_OK.value = keisan_Star(hit_3rd, Star_rate + enemy_rate_Star, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 0, 30, debuff_3rd);
+    // document.rate.Star_EX_OK.value = keisan_Star(EX_hit, Star_rate + enemy_rate_Star, 100, 0, Qbonus_all, 1, getStar_buff, 0, 30, 0);
 
-    document.rate.Star_1st_CO.value = keisan_Star(hit_1st, Star_rate, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 20, 30, debuff_1st);
-    document.rate.Star_2nd_CO.value = keisan_Star(hit_2nd, Star_rate, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 20, 30, debuff_2nd);
-    document.rate.Star_3rd_CO.value = keisan_Star(hit_3rd, Star_rate, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 20, 30, debuff_3rd);
+    // document.rate.Star_1st_CO.value = keisan_Star(hit_1st, Star_rate + enemy_rate_Star, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 20, 30, debuff_1st);
+    // document.rate.Star_2nd_CO.value = keisan_Star(hit_2nd, Star_rate + enemy_rate_Star, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 20, 30, debuff_2nd);
+    // document.rate.Star_3rd_CO.value = keisan_Star(hit_3rd, Star_rate + enemy_rate_Star, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 20, 30, debuff_3rd);
 };
 
 function keisan_DMG(ATK_normal, Bbonus_normal, CARDbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal, random, ATKbuff_normal, DEFdebuff_normal, Cri_normal,
