@@ -25,7 +25,7 @@
   #side {float:left; width:217px; padding:10px 2px 2px 4px; line-height: 1.8em;}
   #main {float:right; width:1046px; border-left:1px solid #ff9900; background-color:#f2f2f2; padding:15px;}
   #topside {float:left; width:217px; padding:10px 2px 2px 4px; line-height: 1.8em;  padding-bottom: 32000px; margin-bottom: -32000px;}
-  #topmain {float:right; width:1046px; border-left:1px solid #ff9900; background-color:#f2f2f2;
+  #topmain {background-color:#f2f2f2;
          padding:15px;  padding-bottom: 32000px; margin-bottom: -32000px;}
   #space1 {width:180px; height:644px; background-color:#f2f2f2; text-align:center; padding:15px; font-size:14px; color:#ff9900;}
   #space2 {width:160px; height:600px; background-color:#f2f2f2; text-align:center; padding:15px;}
