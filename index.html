@@ -90,9 +90,9 @@
                         </select><br>
 
                         <br><br>
-                        平均：<output type="number" name="total1"></output>　
-                        最低：<output type="number" name="total2"></output>　
-                        最高：<output type="number" name="total3"></output>　　
+                        <span class="lowest">最低</span>：<output type="number" name="total2"></output>　
+                        <span>平均</span>：<output type="number" name="total1"></output>　
+                        <span class="highest">最高</span>：<output type="number" name="total3"></output>　　
                         <input type="button" class="button" value="計算" onClick="keisan()">
                         　　<input type="reset" class="button" value="リセット">
                     </form>
@@ -229,7 +229,7 @@
                                 </tr>
                                 <tr>
                                     <th rowspan="3" style="width:100px">ダメージ</th>
-                                    <th>最低</th>
+                                    <th class="lowest">最低</th>
                                     <td>
                                         <output type="number" name="DMG_low_1st"></output>
                                     </td>
@@ -265,7 +265,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>最高</th>
+                                    <th class="highest">最高</th>
                                     <td>
                                         <output type="number" name="DMG_high_1st"></output>
                                     </td>

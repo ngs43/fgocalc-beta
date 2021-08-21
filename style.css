@@ -64,3 +64,6 @@
   /* table.prob_input th {width:130px; padding:2px;} */
   table.prob_input input {width:90px;}
   div.damage_normal output {width:88px; font-size:16px; text-align:center;}
+
+  .lowest {color: blue}
+  .highest {color: red}
