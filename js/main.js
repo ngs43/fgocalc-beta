@@ -1,4 +1,4 @@
-function keisan() {
+function keisan(display_digit) {
     var ATK, NPmu, card, CARDbuff, class1, class2, elemental, ATKbuff, DEFdebuff, sATKbuff, sDEFdebuff, NPbuff, sNPbuff1, sNPbuff2, DMGbuff, DMGdebuff, total1, total2, total3,
         CARDdebuff, sDEF;
 
@@ -18,7 +18,7 @@ function keisan() {
     if (NPbuff > 500) { NPbuff = 500 };
     // if (CARDdebuff > 100) { CARDdebuff = 100 };
 
-    total1 = Math.round(100 * (ATK * NPmu / 100
+    total1 = (ATK * NPmu / 100
         * 0.23 * card
         * (100 + CARDbuff + CARDdebuff) / 100
         * class1
@@ -26,19 +26,19 @@ function keisan() {
         * elemental
         * (100 + ATKbuff + DEFdebuff) / 100
         * Math.max((100 + sATKbuff + sDEFdebuff + NPbuff), 0.1) / 100
-        * sNPbuff1 / 100 * sNPbuff2 / 100));
+        * sNPbuff1 / 100 * sNPbuff2 / 100);
 
     total1 = total1 * Math.max(0, 1.0 - Math.min(5.0, Math.max(0, 1.0 + sDEF / 100) - 1.0)); // 特殊耐性への対応
+    total2 = total1 * 900 / 1000;
+    total3 = total1 * 1099 / 1000;
 
-    document.NP.total1.value = Math.floor(total1 / 100) + DMGbuff + DMGdebuff;
+    // total1 = Math.floor(total1);
+    // total2 = Math.floor(total2);
+    // total3 = Math.floor(total3);
 
-    total2 = total1 * 9;
-    total2 = Math.floor(total2 / 1000);
-
-    total3 = total1 * 1099;
-    total3 = Math.floor(total3 / 100000);
-    document.NP.total2.value = total2 + DMGbuff + DMGdebuff;
-    document.NP.total3.value = total3 + DMGbuff + DMGdebuff;
+    document.NP.total1.value = rounddown(total1 + DMGbuff + DMGdebuff, display_digit);
+    document.NP.total2.value = rounddown(total2 + DMGbuff + DMGdebuff, display_digit);
+    document.NP.total3.value = rounddown(total3 + DMGbuff + DMGdebuff, display_digit);
 };
 
 function keisan_NP(hit, N_A, Abonus, card_buff, Abonus_all, card_NP, enemy_rate, getNP_buff, Cri, OK, card_debuff) {
@@ -184,9 +184,9 @@ function keisan_rate() {
 };
 
 function keisan_DMG(ATK_normal, Bbonus_normal, CARDbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal, random, ATKbuff_normal, DEFdebuff_normal, Cri_normal,
-    EXbonus_normal, sATKbuff_normal, sDEFdebuff_normal, Cribuff_normal, Cri_is, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_normal, sDEF_normal) {
+    EXbonus_normal, sATKbuff_normal, sDEFdebuff_normal, Cribuff_normal, Cri_is, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_normal, sDEF_normal, is_display_decimal) {
     var DMG;
-    DMG = 10 * (ATK_normal * 0.23 *
+    DMG = (ATK_normal * 0.23 *
         (Bbonus_normal / 100 * (100 + CARDbuff_normal + CARDdebuff_normal) / 100 + Bbonus_all_normal / 100)
         * class1_normal // クラス相性
         * class2_normal // クラス補正
@@ -198,11 +198,11 @@ function keisan_DMG(ATK_normal, Bbonus_normal, CARDbuff_normal, Bbonus_all_norma
         * Math.max((100 + sATKbuff_normal + sDEFdebuff_normal + Cribuff_normal * Cri_is), 0.1) / 100
         * Math.max(0, 1.0 - Math.min(5.0, Math.max(0, 1.0 + sDEF_normal / 100) - 1.0)) // 特殊耐性
     );
-    DMG = Math.floor(DMG / 10) + ATK_normal * Bchain_bonus_normal / 100 + DMGbuff_normal + DMGdebuff_normal;
+    DMG = DMG + ATK_normal * Bchain_bonus_normal / 100 + DMGbuff_normal + DMGdebuff_normal;
     return DMG;
 };
 
-function keisan_DMG_normal() {
+function keisan_DMG_normal(display_digit) {
     var ATK_normal, card_1st_normal, card_2nd_normal, card_3rd_normal, Q_CARDbuff_normal, A_CARDbuff_normal, B_CARDbuff_normal, class1_normal, class2_normal,
         elemental_normal, ATKbuff_normal, DEFdebuff_normal, sATKbuff_normal, sDEFdebuff_normal, DMGbuff_normal, DMGdebuff_normal, total1, total2, total3,
         Bbonus_1st_normal, Bbonus_2nd_normal, Bbonus_3rd_normal, Bbonus_EX_normal, EXbonus_normal, Bbonus_all_normal, Bchain_bonus_normal,
@@ -371,23 +371,23 @@ function keisan_DMG_normal() {
         DMG_high_3rd = DMG_Cri_high_3rd;
     };
 
-    document.DMG_normal.DMG_ave_1st.value = DMG_ave_1st;
-    document.DMG_normal.DMG_low_1st.value = DMG_low_1st;
-    document.DMG_normal.DMG_high_1st.value = DMG_high_1st;
-    document.DMG_normal.DMG_ave_2nd.value = DMG_ave_2nd;
-    document.DMG_normal.DMG_low_2nd.value = DMG_low_2nd;
-    document.DMG_normal.DMG_high_2nd.value = DMG_high_2nd;
-    document.DMG_normal.DMG_ave_3rd.value = DMG_ave_3rd;
-    document.DMG_normal.DMG_low_3rd.value = DMG_low_3rd;
-    document.DMG_normal.DMG_high_3rd.value = DMG_high_3rd;
-    document.DMG_normal.DMG_ave_EX.value = DMG_ave_EX;
-    document.DMG_normal.DMG_low_EX.value = DMG_low_EX;
-    document.DMG_normal.DMG_high_EX.value = DMG_high_EX;
+    document.DMG_normal.DMG_ave_1st.value = rounddown(DMG_ave_1st, display_digit);
+    document.DMG_normal.DMG_low_1st.value = rounddown(DMG_low_1st, display_digit);
+    document.DMG_normal.DMG_high_1st.value = rounddown(DMG_high_1st, display_digit);
+    document.DMG_normal.DMG_ave_2nd.value = rounddown(DMG_ave_2nd, display_digit);
+    document.DMG_normal.DMG_low_2nd.value = rounddown(DMG_low_2nd, display_digit);
+    document.DMG_normal.DMG_high_2nd.value = rounddown(DMG_high_2nd, display_digit);
+    document.DMG_normal.DMG_ave_3rd.value = rounddown(DMG_ave_3rd, display_digit);
+    document.DMG_normal.DMG_low_3rd.value = rounddown(DMG_low_3rd, display_digit);
+    document.DMG_normal.DMG_high_3rd.value = rounddown(DMG_high_3rd, display_digit);
+    document.DMG_normal.DMG_ave_EX.value = rounddown(DMG_ave_EX, display_digit);
+    document.DMG_normal.DMG_low_EX.value = rounddown(DMG_low_EX, display_digit);
+    document.DMG_normal.DMG_high_EX.value = rounddown(DMG_high_EX, display_digit);
 
 
-    document.DMG_normal.DMG_ave_total.value = DMG_ave_1st + DMG_ave_2nd + DMG_ave_3rd + DMG_ave_EX;
-    document.DMG_normal.DMG_high_total.value = DMG_high_1st + DMG_high_2nd + DMG_high_3rd + DMG_high_EX;
-    document.DMG_normal.DMG_low_total.value = DMG_low_1st + DMG_low_2nd + DMG_low_3rd + DMG_low_EX;
+    document.DMG_normal.DMG_ave_total.value = Math.floor(DMG_ave_1st) + Math.floor(DMG_ave_2nd) + Math.floor(DMG_ave_3rd) + Math.floor(DMG_ave_EX);
+    document.DMG_normal.DMG_high_total.value = Math.floor(DMG_high_1st) + Math.floor(DMG_high_2nd) + Math.floor(DMG_high_3rd) + Math.floor(DMG_high_EX);
+    document.DMG_normal.DMG_low_total.value = Math.floor(DMG_low_1st) + Math.floor(DMG_low_2nd) + Math.floor(DMG_low_3rd) + Math.floor(DMG_low_EX);
 
 };
 
@@ -464,4 +464,11 @@ function binarySearch(arr, target) {
         }
     }
     return iMin;
+}
+
+// 切り捨て関数
+// [引数] num: 数値, digit: 桁数 (整数値)
+function rounddown(num, digit) {
+    var digitVal = Math.pow(10, digit);
+    return (Math.floor(num * digitVal) / digitVal).toFixed(digit);
 }
