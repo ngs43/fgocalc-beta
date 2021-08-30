@@ -433,8 +433,8 @@ function keisan_prob() {
     for (let x = 0; x < 40000; x++) {
         ret += 40000 - binarySearch(second, enermy_hp - first[x]);
     }
-    ret = ret / (40000 * 40000);
-    document.prob_calc.prob_result.value = Math.floor(ret * 10000) / 100 + "%";
+    ret = ret / (40000 * 4);
+    document.prob_calc.prob_result.value = Math.floor(ret) / 100 + "%";
 };
 
 function calc_damage(l1, s1, l2, s2, l3, s3, l4, s4, rand) {
