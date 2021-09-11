@@ -490,3 +490,17 @@ function rounddown(num, digit) {
     var digitVal = Math.pow(10, digit);
     return (Math.floor(num * digitVal) / digitVal).toFixed(digit);
 }
+function copy_normal_result() {
+    document.prob_calc.DMG_1st.value = parseFloat(document.DMG_normal.DMG_ave_1st.value);
+    document.prob_calc.buff_1st.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_1st.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    document.prob_calc.DMG_2nd.value = parseFloat(document.DMG_normal.DMG_ave_2nd.value);
+    document.prob_calc.buff_2nd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_2nd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    document.prob_calc.DMG_3rd.value = parseFloat(document.DMG_normal.DMG_ave_3rd.value);
+    document.prob_calc.buff_3rd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_3rd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    document.prob_calc.DMG_Ex.value = parseFloat(document.DMG_normal.DMG_ave_EX.value);
+    document.prob_calc.buff_Ex.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_Ex.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+}
