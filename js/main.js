@@ -207,7 +207,7 @@ function keisan_DMG_normal(display_digit) {
         Bbonus_1st_normal, Bbonus_2nd_normal, Bbonus_3rd_normal, Bbonus_EX_normal, EXbonus_normal, Bbonus_all_normal, Bchain_bonus_normal,
         CARDbuff_1st_normal, CARDbuff_2nd_normal, CARDbuff_3rd_normal, Cribuff_normal, Q_CARDdebuff_normal, A_CARDdebuff_normal, B_CARDdebuff_normal,
         CARDdebuff_1st_normal, CARDdebuff_2nd_normal, CARDdebuff_3rd_normal, EXATKbuff_normal,
-        is_card_1st_Cri, is_card_2nd_Cri, is_card_3rd_Cri,
+        is_card_1st_Cri, is_card_2nd_Cri, is_card_3rd_Cri, is_card_Ex_Cri,
         DMG_ave_1st, DMG_ave_2nd, DMG_ave_3rd, DMG_ave_EX,
         DMG_high_1st, DMG_high_2nd, DMG_high_3rd, DMG_high_EX,
         DMG_low_1st, DMG_low_2nd, DMG_low_3rd, DMG_low_EX,
@@ -223,6 +223,7 @@ function keisan_DMG_normal(display_digit) {
     is_card_1st_Cri = document.DMG_normal.is_card_1st_Cri.value;
     is_card_2nd_Cri = document.DMG_normal.is_card_2nd_Cri.value;
     is_card_3rd_Cri = document.DMG_normal.is_card_3rd_Cri.value;
+    is_card_Ex_Cri = document.DMG_normal.is_card_Ex_Cri.value;
     Cribuff_normal = parseFloat(document.DMG_normal.Cribuff_normal.value);
     Q_CARDbuff_normal = parseFloat(document.DMG_normal.Q_CARDbuff_normal.value);
     A_CARDbuff_normal = parseFloat(document.DMG_normal.A_CARDbuff_normal.value);
@@ -356,18 +357,36 @@ function keisan_DMG_normal(display_digit) {
         DMG_ave_1st = DMG_Cri_ave_1st;
         DMG_low_1st = DMG_Cri_low_1st;
         DMG_high_1st = DMG_Cri_high_1st;
+    } else if (is_card_1st_Cri == "zero") {
+        DMG_ave_1st = 0;
+        DMG_low_1st = 0;
+        DMG_high_1st = 0;
     };
 
     if (is_card_2nd_Cri == "Y") {
         DMG_ave_2nd = DMG_Cri_ave_2nd;
         DMG_low_2nd = DMG_Cri_low_2nd;
         DMG_high_2nd = DMG_Cri_high_2nd;
+    } else if (is_card_2nd_Cri == "zero") {
+        DMG_ave_2nd = 0;
+        DMG_low_2nd = 0;
+        DMG_high_2nd = 0;
     };
 
     if (is_card_3rd_Cri == "Y") {
         DMG_ave_3rd = DMG_Cri_ave_3rd;
         DMG_low_3rd = DMG_Cri_low_3rd;
         DMG_high_3rd = DMG_Cri_high_3rd;
+    } else if (is_card_3rd_Cri == "zero") {
+        DMG_ave_3rd = 0;
+        DMG_low_3rd = 0;
+        DMG_high_3rd = 0;
+    };
+
+    if (is_card_Ex_Cri == "zero") {
+        DMG_ave_EX = 0;
+        DMG_low_EX = 0;
+        DMG_high_EX = 0;
     };
 
     document.DMG_normal.DMG_ave_1st.value = rounddown(DMG_ave_1st, display_digit);
@@ -470,4 +489,18 @@ function binarySearch(arr, target) {
 function rounddown(num, digit) {
     var digitVal = Math.pow(10, digit);
     return (Math.floor(num * digitVal) / digitVal).toFixed(digit);
+}
+function copy_normal_result() {
+    document.prob_calc.DMG_1st.value = parseFloat(document.DMG_normal.DMG_ave_1st.value);
+    document.prob_calc.buff_1st.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_1st.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    document.prob_calc.DMG_2nd.value = parseFloat(document.DMG_normal.DMG_ave_2nd.value);
+    document.prob_calc.buff_2nd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_2nd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    document.prob_calc.DMG_3rd.value = parseFloat(document.DMG_normal.DMG_ave_3rd.value);
+    document.prob_calc.buff_3rd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_3rd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    document.prob_calc.DMG_Ex.value = parseFloat(document.DMG_normal.DMG_ave_EX.value);
+    document.prob_calc.buff_Ex.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
+    document.prob_calc.debuff_Ex.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
 }

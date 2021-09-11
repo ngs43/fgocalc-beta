@@ -63,8 +63,8 @@
                             style="width:50px;">％<br><br>
                         クラス相性：
                         <select name="class1">
-                            <option value="1.0" selected>等倍</option>
-                            <option value="2.0">有利</option>
+                            <option value="1.0">等倍</option>
+                            <option value="2.0" selected>有利</option>
                             <option value="0.5">不利</option>
                             <option value="1.5">狂 有利</option>
                             <option value="1.5">分 有利</option>
@@ -149,8 +149,8 @@
                                 style="width:50px;">％<br><br>
                             クラス相性：
                             <select name="class1_normal">
-                                <option value="1.0" selected>等倍</option>
-                                <option value="2.0">有利</option>
+                                <option value="1.0">等倍</option>
+                                <option value="2.0" selected>有利</option>
                                 <option value="0.5">不利</option>
                                 <option value="1.5">狂 有利</option>
                                 <option value="1.5">分 有利</option>
@@ -196,21 +196,21 @@
                                         <select name="card_1st_normal" class="card">
                                             <option value="Q">Quick</option>
                                             <option value="A">Arts</option>
-                                            <option value="B">Buster</option>
+                                            <option value="B" selected>Buster</option>
                                         </select>
                                     </th>
                                     <th>
                                         <select name="card_2nd_normal" class="card">
                                             <option value="Q">Quick</option>
                                             <option value="A">Arts</option>
-                                            <option value="B">Buster</option>
+                                            <option value="B" selected>Buster</option>
                                         </select>
                                     </th>
                                     <th>
                                         <select name="card_3rd_normal" class="card">
                                             <option value="Q">Quick</option>
                                             <option value="A">Arts</option>
-                                            <option value="B">Buster</option>
+                                            <option value="B" selected>Buster</option>
                                         </select>
                                     </th>
                                     <th></th>
@@ -222,21 +222,30 @@
                                         <select name="is_card_1st_Cri" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
+                                            <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
                                         <select name="is_card_2nd_Cri" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
+                                            <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
                                         <select name="is_card_3rd_Cri" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
+                                            <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
-                                    <th></th>
+                                    <th>
+                                        <select name="is_card_Ex_Cri" class="card">
+                                            <option value="N">なし</option>
+                                            <!-- <option value="Y">あり</option> -->
+                                            <option value="zero">ダメージ0</option>
+                                        </select>
+                                    </th>
                                     <th></th>
                                 </tr>
                                 <tr>
@@ -311,7 +320,8 @@
                     <form name="prob_calc">
                         <div class="prob_input">
                             目標ダメージ：<input type="number" name="enermy_hp" min="0" step="10000" width="95px;"
-                                display="inline-block;"><br>
+                                display="inline-block;">　　<input type="button" class="button" style="width:100px;"
+                                value="上の結果を代入" onClick="copy_normal_result()"><br>
                             <br>
                             <table class="prob_input">
                                 <tr>
