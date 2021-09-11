@@ -222,21 +222,30 @@
                                         <select name="is_card_1st_Cri" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
+                                            <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
                                         <select name="is_card_2nd_Cri" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
+                                            <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
                                         <select name="is_card_3rd_Cri" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
+                                            <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
-                                    <th></th>
+                                    <th>
+                                        <select name="is_card_Ex_Cri" class="card">
+                                            <option value="N">なし</option>
+                                            <!-- <option value="Y">あり</option> -->
+                                            <option value="zero">ダメージ0</option>
+                                        </select>
+                                    </th>
                                     <th></th>
                                 </tr>
                                 <tr>
@@ -311,7 +320,6 @@
                     <form name="prob_calc">
                         <div class="prob_input">
                             目標ダメージ：<input type="number" name="enermy_hp" min="0" step="10000" width="95px;"
-                                display="inline-block;"><br>
                             <br>
                             <table class="prob_input">
                                 <tr>
