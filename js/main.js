@@ -439,8 +439,8 @@ function keisan_prob() {
     var second = new Array(40000);
     for (let x = 0; x < 200; x++) {
         for (let y = 0; y < 200; y++) {
-            first[200 * x + y] = calc_damage(DMG_1st, buff_1st - debuff_1st, 0, 0, 0, 0, 0, 0, rand[x]) + calc_damage(0, 0, DMG_2nd, buff_2nd - debuff_2nd, 0, 0, 0, 0, rand[y]);
-            second[200 * x + y] = calc_damage(0, 0, 0, 0, DMG_3rd, buff_3rd - debuff_3rd, 0, 0, rand[x]) + calc_damage(0, 0, 0, 0, 0, 0, DMG_Ex, buff_Ex - debuff_Ex, rand[y]);
+            first[200 * x + y] = calc_damage(DMG_1st, buff_1st + debuff_1st, 0, 0, 0, 0, 0, 0, rand[x]) + calc_damage(0, 0, DMG_2nd, buff_2nd + debuff_2nd, 0, 0, 0, 0, rand[y]);
+            second[200 * x + y] = calc_damage(0, 0, 0, 0, DMG_3rd, buff_3rd + debuff_3rd, 0, 0, rand[x]) + calc_damage(0, 0, 0, 0, 0, 0, DMG_Ex, buff_Ex + debuff_Ex, rand[y]);
         }
     }
     first.sort((a, b) => a - b);
