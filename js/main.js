@@ -69,7 +69,7 @@ function keisan_Star(hit, Star_rate, Qbonus, card_buff, Qbonus_all, card_NP, get
 };
 
 function keisan_rate() {
-    var card_1st, card_2nd, card_3rd, N_A, Q_hit, A_hit, B_hit, EX_hit, Qbonus_1st, Abonus_1st, Bbonus_1st, Q_CARDbuff, A_CARDbuff, B_CARDbuff, NPcard, NP_hit,
+    var card_1st, card_2nd, card_3rd, N_A, Q_hit, A_hit, B_hit, EX_hit, Qbonus_1st, Abonus_1st, Bbonus_1st, Q_CARDbuff, A_CARDbuff, B_CARDbuff, EX_CARDbuff, NPcard, NP_hit,
         Qbonus_all, Abonus_all, Qbonus_2nd, Abonus_2nd, Bbonus_2nd, Qbonus_3rd, Abonus_3rd, Bbonus_3rd, EXbonus,
         buff_1st, buff_2nd, buff_3rd, getNP_buff, hit_1st, hit_2nd, hit_3rd, NPcard_1st, NPcard_2nd, NPcard_3rd, card1st_NP, card2nd_NP, card3rd_NP,
         Star_rate, getStar_buff, enemy_rate_NP, enemy_rate_Star, Q_CARDdebuff, A_CARDdebuff, B_CARDdebuff, debuff_1st, debuff_2nd, debuff_3rd,
@@ -87,6 +87,7 @@ function keisan_rate() {
     Q_CARDbuff = parseFloat(document.rate.Q_CARDbuff.value);
     A_CARDbuff = parseFloat(document.rate.A_CARDbuff.value);
     B_CARDbuff = parseFloat(document.rate.B_CARDbuff.value);
+    EX_CARDbuff = parseFloat(document.rate.EX_CARDbuff.value);
     getNP_buff = parseFloat(document.rate.getNP_buff.value);
     NPcard = document.rate.NPcard.value;
     Star_rate = parseFloat(document.rate.Star_rate.value);
@@ -107,6 +108,7 @@ function keisan_rate() {
     if (Q_CARDbuff > 400) { Q_CARDbuff = 400 };
     if (A_CARDbuff > 400) { A_CARDbuff = 400 };
     if (B_CARDbuff > 400) { B_CARDbuff = 400 };
+    if (EX_CARDbuff > 400) { EX_CARDbuff = 400 };
     if (getNP_buff > 400) { getNP_buff = 400 };
     if (getStar_buff > 500) { getStar_buff = 500 };
     // if (Q_CARDdebuff > 100) { Q_CARDdebuff = 100 };
@@ -148,7 +150,7 @@ function keisan_rate() {
     document.rate.NP_1st.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate_NP, getNP_buff, 1, OK_1st, debuff_1st);
     document.rate.NP_2nd.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate_NP, getNP_buff, 1, OK_2nd, debuff_2nd);
     document.rate.NP_3rd.value = keisan_NP(hit_3rd, N_A, Abonus_3rd, buff_3rd, Abonus_all, card3rd_NP, enemy_rate_NP, getNP_buff, 1, OK_3rd, debuff_3rd);
-    document.rate.NP_EX.value = keisan_NP(EX_hit, N_A, 100, 0, Abonus_all, 1, enemy_rate_NP, getNP_buff, 1, OK_EX, 0);
+    document.rate.NP_EX.value = keisan_NP(EX_hit, N_A, 100, EX_CARDbuff, Abonus_all, 1, enemy_rate_NP, getNP_buff, 1, OK_EX, 0);
 
     document.rate.NP_1st_Cri.value = keisan_NP(hit_1st, N_A, Abonus_1st, buff_1st, Abonus_all, card1st_NP, enemy_rate_NP, getNP_buff, 2, OK_1st, debuff_1st);
     document.rate.NP_2nd_Cri.value = keisan_NP(hit_2nd, N_A, Abonus_2nd, buff_2nd, Abonus_all, card2nd_NP, enemy_rate_NP, getNP_buff, 2, OK_2nd, debuff_2nd);
@@ -166,7 +168,7 @@ function keisan_rate() {
     document.rate.Star_1st.value = keisan_Star(hit_1st, Star_rate + enemy_rate_Star, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 0, OK_1st, debuff_1st);
     document.rate.Star_2nd.value = keisan_Star(hit_2nd, Star_rate + enemy_rate_Star, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 0, OK_2nd, debuff_2nd);
     document.rate.Star_3rd.value = keisan_Star(hit_3rd, Star_rate + enemy_rate_Star, Qbonus_3rd, buff_3rd, Qbonus_all, card3rd_NP, getStar_buff, 0, OK_3rd, debuff_3rd);
-    document.rate.Star_EX.value = keisan_Star(EX_hit, Star_rate + enemy_rate_Star, 100, 0, Qbonus_all, 1, getStar_buff, 0, OK_EX, 0);
+    document.rate.Star_EX.value = keisan_Star(EX_hit, Star_rate + enemy_rate_Star, 100, EX_CARDbuff, Qbonus_all, 1, getStar_buff, 0, OK_EX, 0);
 
     document.rate.Star_1st_Cri.value = keisan_Star(hit_1st, Star_rate + enemy_rate_Star, Qbonus_1st, buff_1st, Qbonus_all, card1st_NP, getStar_buff, 20, OK_1st, debuff_1st);
     document.rate.Star_2nd_Cri.value = keisan_Star(hit_2nd, Star_rate + enemy_rate_Star, Qbonus_2nd, buff_2nd, Qbonus_all, card2nd_NP, getStar_buff, 20, OK_2nd, debuff_2nd);
@@ -243,6 +245,7 @@ function keisan_DMG_normal(display_digit) {
     if (Q_CARDbuff_normal > 400) { Q_CARDbuff_normal = 400 };
     if (A_CARDbuff_normal > 400) { A_CARDbuff_normal = 400 };
     if (B_CARDbuff_normal > 400) { B_CARDbuff_normal = 400 };
+    if (EXATKbuff_normal > 400) { EXATKbuff_normal = 400 };
     if (ATKbuff_normal > 400) { ATKbuff_normal = 400 };
     if (ATKbuff_normal < -100) { ATKbuff_normal = -100 };
     if (DEFdebuff_normal > 100) { DEFdebuff_normal = 100 };
@@ -433,7 +436,7 @@ function keisan_prob() {
     for (let i = 0; i < 200; i++) {
         rand[i] = 0.9 + 0.001 * i;
     }
-    console.log(rand)
+    // console.log(rand)
 
     var first = new Array(40000);
     var second = new Array(40000);
@@ -445,7 +448,7 @@ function keisan_prob() {
     }
     first.sort((a, b) => a - b);
     second.sort((a, b) => a - b);
-    console.log(first);
+    // console.log(second);
 
     var enermy_hp = parseFloat(document.prob_calc.enermy_hp.value);
     var ret = 0;
@@ -454,6 +457,7 @@ function keisan_prob() {
     }
     ret = ret / (40000 * 4);
     document.prob_calc.prob_result.value = Math.floor(ret) / 100 + "%";
+    // document.prob_calc.prob_result.value = ret;  // debug
 };
 
 function calc_damage(l1, s1, l2, s2, l3, s3, l4, s4, rand) {
@@ -467,21 +471,18 @@ function calc_damage(l1, s1, l2, s2, l3, s3, l4, s4, rand) {
  * @return Array 探索結果の添字 見つからなかった場合は-1を返す
  */
 function binarySearch(arr, target) {
-    let idx = -1;
-    let iMin = 0;
-    let iMax = arr.length - 1;
-    while (iMin <= iMax) {
+    let iMin = -1;
+    let iMax = arr.length;
+    while (iMax - iMin > 1) {
         let iMid = Math.floor((iMin + iMax) / 2);
-        if (arr[iMid] === target) {
-            idx = iMid;
-            break;
-        } else if (arr[iMid] < target) {
-            iMin = iMid + 1;
+        if (arr[iMid] < target) {
+            iMin = iMid;
         } else {
-            iMax = iMid - 1;
+            iMax = iMid;
         }
+        // console.log(iMin, iMax);
     }
-    return iMin;
+    return iMax;
 }
 
 // 切り捨て関数
