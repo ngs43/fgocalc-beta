@@ -434,7 +434,7 @@ function keisan_prob() {
     for (let i = 0; i < 200; i++) {
         rand[i] = 0.9 + 0.001 * i;
     }
-    console.log(rand)
+    // console.log(rand)
 
     var first = new Array(40000);
     var second = new Array(40000);
@@ -446,7 +446,7 @@ function keisan_prob() {
     }
     first.sort((a, b) => a - b);
     second.sort((a, b) => a - b);
-    console.log(first);
+    // console.log(second);
 
     var enermy_hp = parseFloat(document.prob_calc.enermy_hp.value);
     var ret = 0;
@@ -455,6 +455,7 @@ function keisan_prob() {
     }
     ret = ret / (40000 * 4);
     document.prob_calc.prob_result.value = Math.floor(ret) / 100 + "%";
+    // document.prob_calc.prob_result.value = ret;  // debug
 };
 
 function calc_damage(l1, s1, l2, s2, l3, s3, l4, s4, rand) {
@@ -468,21 +469,18 @@ function calc_damage(l1, s1, l2, s2, l3, s3, l4, s4, rand) {
  * @return Array 探索結果の添字 見つからなかった場合は-1を返す
  */
 function binarySearch(arr, target) {
-    let idx = -1;
-    let iMin = 0;
-    let iMax = arr.length - 1;
-    while (iMin <= iMax) {
+    let iMin = -1;
+    let iMax = arr.length;
+    while (iMax - iMin > 1) {
         let iMid = Math.floor((iMin + iMax) / 2);
-        if (arr[iMid] === target) {
-            idx = iMid;
-            break;
-        } else if (arr[iMid] < target) {
-            iMin = iMid + 1;
+        if (arr[iMid] < target) {
+            iMin = iMid;
         } else {
-            iMax = iMid - 1;
+            iMax = iMid;
         }
+        // console.log(iMin, iMax);
     }
-    return iMin;
+    return iMax;
 }
 
 // 切り捨て関数
