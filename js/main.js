@@ -108,6 +108,7 @@ function keisan_rate() {
     if (Q_CARDbuff > 400) { Q_CARDbuff = 400 };
     if (A_CARDbuff > 400) { A_CARDbuff = 400 };
     if (B_CARDbuff > 400) { B_CARDbuff = 400 };
+    if (EX_CARDbuff > 400) { EX_CARDbuff = 400 };
     if (getNP_buff > 400) { getNP_buff = 400 };
     if (getStar_buff > 500) { getStar_buff = 500 };
     // if (Q_CARDdebuff > 100) { Q_CARDdebuff = 100 };
@@ -244,6 +245,7 @@ function keisan_DMG_normal(display_digit) {
     if (Q_CARDbuff_normal > 400) { Q_CARDbuff_normal = 400 };
     if (A_CARDbuff_normal > 400) { A_CARDbuff_normal = 400 };
     if (B_CARDbuff_normal > 400) { B_CARDbuff_normal = 400 };
+    if (EXATKbuff_normal > 400) { EXATKbuff_normal = 400 };
     if (ATKbuff_normal > 400) { ATKbuff_normal = 400 };
     if (ATKbuff_normal < -100) { ATKbuff_normal = -100 };
     if (DEFdebuff_normal > 100) { DEFdebuff_normal = 100 };
