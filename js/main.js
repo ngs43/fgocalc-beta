@@ -497,20 +497,47 @@ function copy_normal_result() {
     card_2nd_normal = document.DMG_normal.card_2nd_normal.value;
     card_3rd_normal = document.DMG_normal.card_3rd_normal.value;
     ATK_normal = parseFloat(document.DMG_normal.ATK_normal.value);
+    Bchain_bonus_normal = 0;
     if (card_1st_normal == card_2nd_normal && card_2nd_normal == card_3rd_normal && card_1st_normal == "B") { Bchain_bonus_normal = 20; }
 
-    document.prob_calc.DMG_1st.value = parseFloat(document.DMG_normal.DMG_ave_1st.value);
-    document.prob_calc.buff_1st.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
-    document.prob_calc.debuff_1st.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
-    document.prob_calc.DMG_2nd.value = parseFloat(document.DMG_normal.DMG_ave_2nd.value);
-    document.prob_calc.buff_2nd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
-    document.prob_calc.debuff_2nd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
-    document.prob_calc.DMG_3rd.value = parseFloat(document.DMG_normal.DMG_ave_3rd.value);
-    document.prob_calc.buff_3rd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
-    document.prob_calc.debuff_3rd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
-    document.prob_calc.DMG_Ex.value = parseFloat(document.DMG_normal.DMG_ave_EX.value);
-    document.prob_calc.buff_Ex.value = parseFloat(document.DMG_normal.DMGbuff_normal.value);
-    document.prob_calc.debuff_Ex.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    if (document.DMG_normal.is_card_1st_Cri.value == "zero") {
+        document.prob_calc.DMG_1st.value = 0;
+        document.prob_calc.buff_1st.value = 0;
+        document.prob_calc.debuff_1st.value = 0;
+    } else {
+        document.prob_calc.DMG_1st.value = parseFloat(document.DMG_normal.DMG_ave_1st.value);
+        document.prob_calc.buff_1st.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
+        document.prob_calc.debuff_1st.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    };
 
+    if (document.DMG_normal.is_card_2nd_Cri.value == "zero") {
+        document.prob_calc.DMG_2nd.value = 0;
+        document.prob_calc.buff_2nd.value = 0;
+        document.prob_calc.debuff_2nd.value = 0;
+    } else {
+        document.prob_calc.DMG_2nd.value = parseFloat(document.DMG_normal.DMG_ave_2nd.value);
+        document.prob_calc.buff_2nd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
+        document.prob_calc.debuff_2nd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    };
+
+    if (document.DMG_normal.is_card_3rd_Cri.value == "zero") {
+        document.prob_calc.DMG_3rd.value = 0;
+        document.prob_calc.buff_3rd.value = 0;
+        document.prob_calc.debuff_3rd.value = 0;
+    } else {
+        document.prob_calc.DMG_3rd.value = parseFloat(document.DMG_normal.DMG_ave_3rd.value);
+        document.prob_calc.buff_3rd.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
+        document.prob_calc.debuff_3rd.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    };
+
+    if (document.DMG_normal.is_card_Ex_Cri.value == "zero") {
+        document.prob_calc.DMG_Ex.value = 0;
+        document.prob_calc.buff_Ex.value = 0;
+        document.prob_calc.debuff_Ex.value = 0;
+    } else {
+        document.prob_calc.DMG_Ex.value = parseFloat(document.DMG_normal.DMG_ave_EX.value);
+        document.prob_calc.buff_Ex.value = parseFloat(document.DMG_normal.DMGbuff_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
+        document.prob_calc.debuff_Ex.value = parseFloat(document.DMG_normal.DMGdebuff_normal.value);
+    };
 
 }
