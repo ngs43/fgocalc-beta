@@ -187,6 +187,7 @@ function keisan_rate() {
 function keisan_DMG(ATK_normal, Bbonus_normal, CARDbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal, random, ATKbuff_normal, DEFdebuff_normal, Cri_normal,
     EXbonus_normal, sATKbuff_normal, sDEFdebuff_normal, Cribuff_normal, Cri_is, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_normal, sDEF_normal, is_display_decimal) {
     var DMG;
+    if (Cribuff_normal > 500) { Cribuff_normal = 500 };
     DMG = (ATK_normal * 0.23 *
         (Bbonus_normal / 100 * (100 + CARDbuff_normal + CARDdebuff_normal) / 100 + Bbonus_all_normal / 100)
         * class1_normal // クラス相性
@@ -209,6 +210,8 @@ function keisan_DMG_normal(display_digit) {
         Bbonus_1st_normal, Bbonus_2nd_normal, Bbonus_3rd_normal, Bbonus_EX_normal, EXbonus_normal, Bbonus_all_normal, Bchain_bonus_normal,
         CARDbuff_1st_normal, CARDbuff_2nd_normal, CARDbuff_3rd_normal, Cribuff_normal, Q_CARDdebuff_normal, A_CARDdebuff_normal, B_CARDdebuff_normal,
         CARDdebuff_1st_normal, CARDdebuff_2nd_normal, CARDdebuff_3rd_normal, EXATKbuff_normal,
+        Q_CARDCribuff_normal, A_CARDCribuff_normal, B_CARDCribuff_normal,
+        Cribuff_1st_normal, Cribuff_2nd_normal, Cribuff_3rd_normal,
         is_card_1st_Cri, is_card_2nd_Cri, is_card_3rd_Cri, is_card_Ex_Cri,
         DMG_ave_1st, DMG_ave_2nd, DMG_ave_3rd, DMG_ave_EX,
         DMG_high_1st, DMG_high_2nd, DMG_high_3rd, DMG_high_EX,
@@ -230,6 +233,9 @@ function keisan_DMG_normal(display_digit) {
     Q_CARDbuff_normal = parseFloat(document.DMG_normal.Q_CARDbuff_normal.value);
     A_CARDbuff_normal = parseFloat(document.DMG_normal.A_CARDbuff_normal.value);
     B_CARDbuff_normal = parseFloat(document.DMG_normal.B_CARDbuff_normal.value);
+    Q_CARDCribuff_normal = parseFloat(document.DMG_normal.Q_CARDCribuff_normal.value);
+    A_CARDCribuff_normal = parseFloat(document.DMG_normal.A_CARDCribuff_normal.value);
+    B_CARDCribuff_normal = parseFloat(document.DMG_normal.B_CARDCribuff_normal.value);
     class1_normal = parseFloat(document.DMG_normal.class1_normal.value); class2_normal = parseFloat(document.DMG_normal.class2_normal.value);
     elemental_normal = parseFloat(document.DMG_normal.elemental_normal.value); ATKbuff_normal = parseFloat(document.DMG_normal.ATKbuff_normal.value);
     DEFdebuff_normal = parseFloat(document.DMG_normal.DEFdebuff_normal.value);
@@ -258,54 +264,54 @@ function keisan_DMG_normal(display_digit) {
 
     Bbonus_all_normal = 0; Bchain_bonus_normal = 0; EXbonus_normal = 200;
 
-    if (card_1st_normal == "Q") { Bbonus_1st_normal = 80; CARDbuff_1st_normal = Q_CARDbuff_normal; CARDdebuff_1st_normal = Q_CARDdebuff_normal; };
-    if (card_1st_normal == "A") { Bbonus_1st_normal = 100; CARDbuff_1st_normal = A_CARDbuff_normal; CARDdebuff_1st_normal = A_CARDdebuff_normal; };
-    if (card_1st_normal == "B") { Bbonus_all_normal = 50; Bbonus_1st_normal = 150; CARDbuff_1st_normal = B_CARDbuff_normal; CARDdebuff_1st_normal = B_CARDdebuff_normal; };
-    if (card_2nd_normal == "Q") { Bbonus_2nd_normal = 96; CARDbuff_2nd_normal = Q_CARDbuff_normal; CARDdebuff_2nd_normal = Q_CARDdebuff_normal; };
-    if (card_2nd_normal == "A") { Bbonus_2nd_normal = 120; CARDbuff_2nd_normal = A_CARDbuff_normal; CARDdebuff_2nd_normal = A_CARDdebuff_normal; };
-    if (card_2nd_normal == "B") { Bbonus_2nd_normal = 180; CARDbuff_2nd_normal = B_CARDbuff_normal; CARDdebuff_2nd_normal = B_CARDdebuff_normal; };
-    if (card_3rd_normal == "Q") { Bbonus_3rd_normal = 112; CARDbuff_3rd_normal = Q_CARDbuff_normal; CARDdebuff_3rd_normal = Q_CARDdebuff_normal; };
-    if (card_3rd_normal == "A") { Bbonus_3rd_normal = 140; CARDbuff_3rd_normal = A_CARDbuff_normal; CARDdebuff_3rd_normal = A_CARDdebuff_normal; };
-    if (card_3rd_normal == "B") { Bbonus_3rd_normal = 210; CARDbuff_3rd_normal = B_CARDbuff_normal; CARDdebuff_3rd_normal = B_CARDdebuff_normal; };
+    if (card_1st_normal == "Q") { Bbonus_1st_normal = 80; CARDbuff_1st_normal = Q_CARDbuff_normal; CARDdebuff_1st_normal = Q_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_1st_normal == "A") { Bbonus_1st_normal = 100; CARDbuff_1st_normal = A_CARDbuff_normal; CARDdebuff_1st_normal = A_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_1st_normal == "B") { Bbonus_all_normal = 50; Bbonus_1st_normal = 150; CARDbuff_1st_normal = B_CARDbuff_normal; CARDdebuff_1st_normal = B_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_2nd_normal == "Q") { Bbonus_2nd_normal = 96; CARDbuff_2nd_normal = Q_CARDbuff_normal; CARDdebuff_2nd_normal = Q_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_2nd_normal == "A") { Bbonus_2nd_normal = 120; CARDbuff_2nd_normal = A_CARDbuff_normal; CARDdebuff_2nd_normal = A_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_2nd_normal == "B") { Bbonus_2nd_normal = 180; CARDbuff_2nd_normal = B_CARDbuff_normal; CARDdebuff_2nd_normal = B_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_3rd_normal == "Q") { Bbonus_3rd_normal = 112; CARDbuff_3rd_normal = Q_CARDbuff_normal; CARDdebuff_3rd_normal = Q_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_3rd_normal == "A") { Bbonus_3rd_normal = 140; CARDbuff_3rd_normal = A_CARDbuff_normal; CARDdebuff_3rd_normal = A_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_3rd_normal == "B") { Bbonus_3rd_normal = 210; CARDbuff_3rd_normal = B_CARDbuff_normal; CARDdebuff_3rd_normal = B_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + B_CARDCribuff_normal; };
 
     if (card_1st_normal == card_2nd_normal && card_2nd_normal == card_3rd_normal && card_1st_normal == "B") { EXbonus_normal = 350; Bchain_bonus_normal = 20; }
     if (card_1st_normal == card_2nd_normal && card_2nd_normal == card_3rd_normal) { EXbonus_normal = 350; };
 
     DMG_ave_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_1st_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
     // document.DMG_normal.DMG_ave_1st.value = DMG_ave_1st;
     DMG_low_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_1st_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
     // document.DMG_normal.DMG_low_1st.value = DMG_low_1st;
     DMG_high_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_1st_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
     // document.DMG_normal.DMG_high_1st.value = DMG_high_1st;
     DMG_ave_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_2nd_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
     // document.DMG_normal.DMG_ave_2nd.value = DMG_ave_2nd;
     DMG_low_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_2nd_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
     // document.DMG_normal.DMG_low_2nd.value = DMG_low_2nd;
     DMG_high_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_2nd_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
     // document.DMG_normal.DMG_high_2nd.value = DMG_high_2nd;
     DMG_ave_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_3rd_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
     // document.DMG_normal.DMG_ave_3rd.value = DMG_ave_3rd;
     DMG_low_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_3rd_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
     // document.DMG_normal.DMG_low_3rd.value = DMG_low_3rd;
     DMG_high_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_3rd_normal, 0, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
     // document.DMG_normal.DMG_high_3rd.value = DMG_high_3rd;
     DMG_ave_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
@@ -321,39 +327,39 @@ function keisan_DMG_normal(display_digit) {
     // document.DMG_normal.DMG_high_EX.value = DMG_high_EX;
     DMG_Cri_ave_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_1st_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_ave_1st.value = DMG_Cri_ave_1st;
     DMG_Cri_low_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_1st_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_low_1st.value = DMG_Cri_low_1st;
     DMG_Cri_high_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_1st_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_high_1st.value = DMG_Cri_high_1st;
     DMG_Cri_ave_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_2nd_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_ave_2nd.value = DMG_Cri_ave_2nd;
     DMG_Cri_low_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_2nd_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_low_2nd.value = DMG_Cri_low_2nd;
     DMG_Cri_high_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_2nd_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_high_2nd.value = DMG_Cri_high_2nd;
     DMG_Cri_ave_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_3rd_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_ave_3rd.value = DMG_Cri_ave_3rd;
     DMG_Cri_low_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         0.9, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_3rd_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_low_3rd.value = DMG_Cri_low_3rd;
     DMG_Cri_high_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
         1.099, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
-        sDEFdebuff_normal, Cribuff_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        sDEFdebuff_normal, Cribuff_3rd_normal, 1, DMGbuff_normal, DMGdebuff_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
     // document.DMG_normal.DMG_Cri_high_3rd.value = DMG_Cri_high_3rd;
 
     if (is_card_1st_Cri == "Y") {
