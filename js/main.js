@@ -497,6 +497,7 @@ function rounddown(num, digit) {
     var digitVal = Math.pow(10, digit);
     return (Math.floor(num * digitVal) / digitVal).toFixed(digit);
 }
+
 function copy_normal_result() {
     var card_1st_normal, card_2nd_normal, card_3rd_normal, ATK_normal, Bchain_bonus_normal;
     // Bチェインボーナス分の反映
