@@ -39,7 +39,7 @@
                     <h2>宝具ダメージ計算</h2><br>
 
                     <form name="NP" class="NP">
-                        ATK：<input type="number" name="ATK" min="0" step="500" style="width:60px;"><br>
+                        ATK：<input type="number" name="ATK" min="0" step="1" style="width:60px;"><br>
                         宝具倍率：<input type="number" name="NPmu" min="0" step="50" style="width:50px;">％<br>
                         攻撃力 バフ：<input type="number" name="ATKbuff" value="0" min="0" step="1" style="width:50px;">％<br>
                         カード バフ：<input type="number" name="CARDbuff" value="0" min="0" step="1" style="width:50px;">％<br>
@@ -60,7 +60,7 @@
                             style="width:50px;"><br>
                         敵ダメージ デバフ：<input type="number" name="DMGdebuff" value="0" min="0" step="100"
                             style="width:50px;"><br>
-                        敵特殊耐性：<input type="number" name="sDEF" value="0" min="-100" step="100"
+                        敵特殊耐性：<input type="number" name="sDEF" value="0" min="-100" step="100" step="10"
                             style="width:50px;">％<br><br>
                         クラス相性：
                         <select name="class1">
@@ -149,7 +149,7 @@
                                 style="width:50px;"><br>
                             敵ダメージ デバフ：<input type="number" name="DMGdebuff_normal" value="0" min="0" step="100"
                                 style="width:50px;"><br>
-                            敵特殊耐性：<input type="number" name="sDEF_normal" value="0" min="-100" step="100"
+                            敵特殊耐性：<input type="number" name="sDEF_normal" value="0" min="-100" step="10"
                                 style="width:50px;">％<br><br>
                             クラス相性：
                             <select name="class1_normal">
@@ -587,7 +587,7 @@
                         攻防バフ　：<input type="number" name="ATK_buff" min="0" step="10" style="width:60px;">％　　<input
                             type="checkbox" name="ATK_buff_smallsteps">
                         <label for="ATK_buff_smallsteps">1%刻みで検索</label><br>
-                        カードバフ：<input type="number" name="CARD_buff" min="0" step="1" style="width:60px;">％　　<input
+                        カードバフ：<input type="number" name="CARD_buff" min="0" step="10" style="width:60px;">％　　<input
                             type="checkbox" name="CARD_buff_smallsteps">
                         <label for="CARD_buff_smallsteps">1%刻みで検索</label><br>
                         特攻バフ　：<input type="number" name="s_buff" min="0" step="10" style="width:60px;">％　　<input
