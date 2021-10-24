@@ -14,6 +14,7 @@
     <link rel="icon" type="image/x-icon" href="image/favicon1.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script charset="UTF-8" type="text/javascript" src="js/main.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="js/test.js"></script>
     <base target="_blank">
 </head>
 
@@ -568,8 +569,36 @@
                     </form>
                 </div>
 
+
+                <div class="detect_buff">
+                    <h2>バフ・乱数特定</h2>
+                    <br>
+
+                    <form name="detect_buff">
+                        <div class="detect_buff_input"></div>
+                        基本ダメージ：<input type="number" name="base_damage" min="0" step="1" width="95px;"
+                            display="inline-block;">　固定ダメージ：<input type="number" name="fixed_damage" min="0" step="1"
+                            width="95px;" display="inline-block;">　実機ダメージ：<input type="number" name="actual_damage"
+                            min="0" step="1" width="95px;" display="inline-block;"><br>
+                        <br>
+                        攻防バフ：<input type="number" name="ATK_buff" min="0" step="10" style="width:60px;">％<br>
+                        カードバフ：<input type="number" name="CARD_buff" min="0" step="1" style="width:60px;">％<br>
+                        特攻バフ：<input type="number" name="s_buff" min="0" step="10" style="width:60px;">％<br>
+                        特殊耐性：<input type="number" name="sDEF" min="0" step="10" style="width:60px;">％<br>
+                        乱数：<input type="number" name="randnum" min="0.900" max="1.099" step="0.001"
+                            style="width:60px;">（0.900〜1.099）
+
+                        　　　　　　<input type="button" class="button" value="計算" onClick="detect_buff_main()">
+
+                        <br><br><textarea name="detect_result" cols="100" rows="10" readonly
+                            style="left: 20px;"></textarea>
+
+                </div>　　
+                </form>
             </div>
+
         </div>
+    </div>
     </div>
 </body>
 

@@ -61,6 +61,7 @@ function detect_randnum(base_damage, fixed_damage, actual_damage) {
  */
 function detect_buff(base_damage, fixed_damage, actual_damage, ATK_buff = NaN, CARD_buff = NaN, s_buff = NaN, sDEF = NaN, detected_randnum = NaN) {
     var DMG;
+    var cnt = 1;
     var ATK_buff, CARD_buff_array, s_buff_array, sDEF_array;
     var result = new Array();
     if (isNaN(ATK_buff)) { ATK_buff_array = Array(50).fill().map((_, i) => 10 * i - 100) } else { ATK_buff_array = [ATK_buff] };
@@ -94,14 +95,50 @@ function detect_buff(base_damage, fixed_damage, actual_damage, ATK_buff = NaN, C
                     if (randnum_OK(detect_randnum(DMG, fixed_damage, actual_damage), detected_randnum)) {
                         result.push({ '攻防バフ': ATK_buff, 'カードバフデバフ': CARD_buff, '特攻バフ': s_buff, '特殊耐性': sDEF, '乱数': detect_randnum(DMG, fixed_damage, actual_damage) });
                         // console.log(CARD_buff, ATK_buff, s_buff, sDEF, detect_randnum(DMG, fixed_damage, actual_damage));
+                        cnt += 1;
+                    }
+                    if (cnt > 100) {
+                        return result;
                     }
                 }
             }
         }
     }
-    console.log(result);
+    return result;
 };
 
+function detect_buff_main() {
+    var result = detect_buff(parseFloat(document.detect_buff.base_damage.value),
+        parseFloat(document.detect_buff.fixed_damage.value),
+        parseFloat(document.detect_buff.actual_damage.value),
+        parseFloat(document.detect_buff.ATK_buff.value),
+        parseFloat(document.detect_buff.CARD_buff.value),
+        parseFloat(document.detect_buff.s_buff.value),
+        parseFloat(document.detect_buff.sDEF.value),
+        parseFloat(document.detect_buff.randnum.value)
+    )
+    // var result = detect_buff(54917.5140, 0, 726677, 20, 50, NaN, NaN, NaN);
+    var print_result = '';
+
+    result.forEach(function (value) {
+
+        // オブジェクトを配列に変換
+        var property = Object.entries(value);
+
+        property.forEach(function (v) {
+            print_result += v.join(':');
+            print_result += ', ';
+        });
+        print_result += '\n';
+    });
+    console.log(result.length);
+    if (result.length >= 100) {
+        print_result += '100件までしか表示されません'
+    }
+    document.detect_buff.detect_result.value = print_result;
+}
+
+// detect_buff_main();
 // detect_buff(2640.8646, 0, 3197, 0, 82, NaN, NaN, 1.008);
 // detect_buff(54917.5140, 0, 726677, 20, 50, NaN, NaN, NaN);
 // detect_buff(54917.5140, 0, 129187, 20, 0, 140, 20, NaN);
