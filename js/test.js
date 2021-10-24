@@ -58,16 +58,63 @@ function detect_randnum(base_damage, fixed_damage, actual_damage) {
  * detect_buff(2640.8646, 0, 3197, 0, 82, NaN, NaN, 1.008);
  * @example 乱数のみの特定も可能です
  * detect_buff(54917.5140, 0, 129187, 20, 0, 140, 20, NaN);
+ * @example 1刻みでの探索がしたいとき
+ * detect_buff(63102.6045, 0, 1376756, 100, 46, NaN, NaN, NaN, [false, false, true, false])
  */
-function detect_buff(base_damage, fixed_damage, actual_damage, ATK_buff = NaN, CARD_buff = NaN, s_buff = NaN, sDEF = NaN, detected_randnum = NaN) {
+function detect_buff(base_damage, fixed_damage, actual_damage,
+    ATK_buff = NaN, CARD_buff = NaN, s_buff = NaN, sDEF = NaN, detected_randnum = NaN,
+    small_steps = [false, false, false, false]) {
     var DMG;
-    var cnt = 1;
+    var cnt = 0;
     var ATK_buff, CARD_buff_array, s_buff_array, sDEF_array;
+    var ATK_buff_smallsteps = small_steps[0],
+        CARD_buff_smallsteps = small_steps[1],
+        s_buff_smallsteps = small_steps[2],
+        sDEF_smallsteps = small_steps[3];
     var result = new Array();
-    if (isNaN(ATK_buff)) { ATK_buff_array = Array(50).fill().map((_, i) => 10 * i - 100) } else { ATK_buff_array = [ATK_buff] };
-    if (isNaN(CARD_buff)) { CARD_buff_array = Array(500).fill().map((_, i) => i - 100) } else { CARD_buff_array = [CARD_buff] };
-    if (isNaN(s_buff)) { s_buff_array = Array(150).fill().map((_, i) => 10 * i - 500) } else { s_buff_array = [s_buff] };
-    if (isNaN(sDEF)) { sDEF_array = Array(10).fill().map((_, i) => 10 * i) } else { sDEF_array = [sDEF] };
+    /**
+     * 基本は10刻みに探索，1刻みの指示の有無で場合分けする
+     */
+    if (isNaN(ATK_buff)) {
+        if (ATK_buff_smallsteps) {
+            ATK_buff_array = Array(500).fill().map((_, i) => -i + 400);
+        } else {
+            ATK_buff_array = Array(50).fill().map((_, i) => -10 * i + 400);
+        }
+    } else {
+        ATK_buff_array = [ATK_buff];
+    };
+    if (isNaN(CARD_buff)) {
+        if (CARD_buff_smallsteps) {
+            CARD_buff_array = Array(500).fill().map((_, i) => -i + 400);
+        } else {
+            CARD_buff_array = Array(50).fill().map((_, i) => -10 * i + 400);
+        }
+    } else {
+        CARD_buff_array = [CARD_buff]
+    };
+    if (isNaN(s_buff)) {
+        if (s_buff_smallsteps) {
+            s_buff_array = Array(1500).fill().map((_, i) => -i + 1000);
+        } else {
+            s_buff_array = Array(150).fill().map((_, i) => -10 * i + 1000);
+        }
+    } else {
+        s_buff_array = [s_buff]
+    };
+    if (isNaN(sDEF)) {
+        if (sDEF_smallsteps) {
+            sDEF_array = Array(100).fill().map((_, i) => i);
+        } else {
+            sDEF_array = Array(10).fill().map((_, i) => 10 * i);
+        }
+    } else {
+        sDEF_array = [sDEF]
+    };
+    if (ATK_buff_array.length * CARD_buff_array.length * s_buff_array.length * sDEF_array.length > 1500 * 500 && isNaN(detected_randnum)) {
+        alert("空欄が多すぎます！空欄は2個までにするか，1刻みでの探索を消してください．");
+        return;
+    }
     /**
      * 指定された乱数があればそれに一致するかどうか，なければNaNでないかどうか
      * @param {number} 乱数 or NaN 
@@ -78,22 +125,22 @@ function detect_buff(base_damage, fixed_damage, actual_damage, ATK_buff = NaN, C
         if (isNaN(detected_randnum)) {
             return !isNaN(randnum);
         } else {
-            return (randnum == detected_randnum);
+            return (Math.abs(randnum - detected_randnum) < 0.0001);
         }
     }
-
-    for (const ATK_buff of ATK_buff_array) {
-        for (const CARD_buff of CARD_buff_array) {
-            for (const s_buff of s_buff_array) {
-                for (const sDEF of sDEF_array) {
+    for (const sDEF of sDEF_array) {
+        for (const ATK_buff of ATK_buff_array) {
+            for (const CARD_buff of CARD_buff_array) {
+                for (const s_buff of s_buff_array) {
                     DMG = base_damage
                         * (100 + CARD_buff) / 100 // 色バフデバフ
                         * (100 + ATK_buff) / 100 // 攻撃バフ防御デバフ
                         * Math.max((100 + s_buff), 0.1) / 100
                         * Math.max(0, 1.0 - Math.min(5.0, Math.max(0, 1.0 + sDEF / 100) - 1.0)) // 特殊耐性
                         ;
-                    if (randnum_OK(detect_randnum(DMG, fixed_damage, actual_damage), detected_randnum)) {
-                        result.push({ '攻防バフ': ATK_buff, 'カードバフデバフ': CARD_buff, '特攻バフ': s_buff, '特殊耐性': sDEF, '乱数': detect_randnum(DMG, fixed_damage, actual_damage) });
+                    var temp_randnum = detect_randnum(DMG, fixed_damage, actual_damage);
+                    if (randnum_OK(temp_randnum, detected_randnum)) {
+                        result.push({ '攻防バフ': ATK_buff, 'カードバフデバフ': CARD_buff, '特攻バフ': s_buff, '特殊耐性': sDEF, '乱数': rounddown(temp_randnum, 3) });
                         // console.log(CARD_buff, ATK_buff, s_buff, sDEF, detect_randnum(DMG, fixed_damage, actual_damage));
                         cnt += 1;
                     }
@@ -104,10 +151,16 @@ function detect_buff(base_damage, fixed_damage, actual_damage, ATK_buff = NaN, C
             }
         }
     }
+    console.log(result);
     return result;
 };
 
 function detect_buff_main() {
+    var small_steps = [document.detect_buff.ATK_buff_smallsteps.checked,
+    document.detect_buff.CARD_buff_smallsteps.checked,
+    document.detect_buff.s_buff_smallsteps.checked,
+    document.detect_buff.sDEF_smallsteps.checked
+    ];
     var result = detect_buff(parseFloat(document.detect_buff.base_damage.value),
         parseFloat(document.detect_buff.fixed_damage.value),
         parseFloat(document.detect_buff.actual_damage.value),
@@ -115,7 +168,8 @@ function detect_buff_main() {
         parseFloat(document.detect_buff.CARD_buff.value),
         parseFloat(document.detect_buff.s_buff.value),
         parseFloat(document.detect_buff.sDEF.value),
-        parseFloat(document.detect_buff.randnum.value)
+        parseFloat(document.detect_buff.randnum.value),
+        small_steps
     )
     // var result = detect_buff(54917.5140, 0, 726677, 20, 50, NaN, NaN, NaN);
     var print_result = '';
@@ -133,12 +187,22 @@ function detect_buff_main() {
     });
     console.log(result.length);
     if (result.length >= 100) {
-        print_result += '100件までしか表示されません'
+        print_result += '100件までしか表示されません';
+    } else if (result.length == 0) {
+        print_result += '該当する結果が見つかりませんでした';
     }
     document.detect_buff.detect_result.value = print_result;
+}
+
+// 切り捨て関数
+// [引数] num: 数値, digit: 桁数 (整数値)
+function rounddown(num, digit) {
+    var digitVal = Math.pow(10, digit);
+    return (Math.floor(num * digitVal) / digitVal).toFixed(digit);
 }
 
 // detect_buff_main();
 // detect_buff(2640.8646, 0, 3197, 0, 82, NaN, NaN, 1.008);
 // detect_buff(54917.5140, 0, 726677, 20, 50, NaN, NaN, NaN);
 // detect_buff(54917.5140, 0, 129187, 20, 0, 140, 20, NaN);
+// detect_buff(63102.6045, 0, 1376756, 100, 46, NaN, NaN, NaN, [false, false, true, false])
