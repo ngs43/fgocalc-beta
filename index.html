@@ -574,15 +574,18 @@
 
 
                 <div class="detect_buff">
-                    <h2>バフ・乱数推定</h2>
+                    <h2>バフ・乱数推定　<span style="font-size: smaller;">→<a
+                                href="https://github.com/keinoda/fgocalc/README.md">使い方</a></span></h2>
                     <br>
 
                     <form name="detect_buff">
                         <div class="detect_buff_input"></div>
-                        基本ダメージ：<input type="number" name="base_damage" value="0" min="0" step="1" width="95px;"
-                            display="inline-block;">　固定ダメージ：<input type="number" name="fixed_damage" value="0" min="0"
-                            step="1" width="95px;" display="inline-block;">　実機ダメージ：<input type="number"
-                            name="actual_damage" value="0" min="0" step="1" width="95px;" display="inline-block;"><br>
+                        <a title="以下のバフを全て0にしたダメージを入力してください" style="color:#F00;
+                        text-decoration:underline;">基本ダメージ</a>：<input type="number" name="base_damage" value="0"
+                            min="0" step="1" width="95px;" display="inline-block;">　固定ダメージ：<input type="number"
+                            name="fixed_damage" value="0" min="0" step="1" width="95px;"
+                            display="inline-block;">　実機ダメージ：<input type="number" name="actual_damage" value="0" min="0"
+                            step="1" width="95px;" display="inline-block;"><br>
                         <br>
                         攻防バフ　：<input type="number" name="ATK_buff" min="0" step="10" style="width:60px;">％　　<input
                             type="checkbox" name="ATK_buff_smallsteps">
