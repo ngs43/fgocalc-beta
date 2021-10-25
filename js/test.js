@@ -24,8 +24,8 @@ function detect_randnum(base_damage, fixed_damage, actual_damage) {
         }
     } else {
         // 整数で与えられたときは，最大から最小まで調べる
-        const MIN_base_damage = base_damage;
-        const MAX_base_damage = base_damage + 0.999;
+        const MIN_base_damage = Math.floor(base_damage);
+        const MAX_base_damage = base_damage + 0.9999;
         for (let idx = 0; idx < rand.length; idx++) {
             var randnum = rand[idx];
             if (Math.floor((MIN_base_damage - fixed_damage) * randnum) + fixed_damage <= actual_damage
@@ -206,3 +206,4 @@ function rounddown(num, digit) {
 // detect_buff(54917.5140, 0, 726677, 20, 50, NaN, NaN, NaN);
 // detect_buff(54917.5140, 0, 129187, 20, 0, 140, 20, NaN);
 // detect_buff(63102.6045, 0, 1376756, 100, 46, NaN, NaN, NaN, [false, false, true, false])
+detect_buff(64803.4200, 0, 991719, 109.4, NaN, NaN, 0, NaN, [false, false, true, false])
