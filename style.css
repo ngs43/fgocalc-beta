@@ -50,7 +50,7 @@
   div.damage {margin:0px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:600px;}
   div.rate {border:solid 4px #cbb3e7; padding:10px; height:540px; margin:30px 0px 10px 0px;}
   div.prob_calc {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:390px;}
-  div.detect_buff {margin:0px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:450px;}
+  div.detect_buff {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:450px;}
   p.policy {font-size:20px; border:dotted 2px; padding:3px;}
   #policy_text {font-size:16px; line-height:1.5em;}
   #info {font-size:13px; border:solid 2px #b0e0ff;  margin:5px 0px 20px 0px; }
