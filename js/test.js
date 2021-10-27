@@ -46,6 +46,8 @@ function detect_randnum(base_damage, fixed_damage, actual_damage) {
  * @param {number} base_damage バフの無いダメージです．原則として小数まで入れてください
  * @param {number} fixed_damage 固定ダメージです．
  * @param {number} actual_damage 実機で出たダメージです．
+ * @param {number} CARD_bonus コマンドが何枚目かによって変動する値です．
+ * @param {number} CARD_bonus_all B始動なら50，それ以外なら0です．
  * 以下の部分が探索するパラメータです．分からないところに NaN を，確定しているところは数値を入力してください．
  * @param {number} ATK_buff 攻防バフの合計
  * @param {number} CARD_buff 色バフのまとめ
@@ -63,7 +65,7 @@ function detect_randnum(base_damage, fixed_damage, actual_damage) {
  * @example 1刻みでの探索がしたいとき
  * detect_buff(63102.6045, 0, 1376756, 100, 46, NaN, NaN, NaN, [false, false, true, false])
  */
-function detect_buff(base_damage, fixed_damage, actual_damage,
+function detect_buff(base_damage, fixed_damage, actual_damage, CARD_bonus = 100, CARD_bonus_all = 0,
     ATK_buff = NaN, CARD_buff = NaN, s_buff = NaN, sDEF = NaN, detected_randnum = NaN,
     small_steps = [false, false, false, false]) {
     var DMG;
@@ -130,12 +132,14 @@ function detect_buff(base_damage, fixed_damage, actual_damage,
             return (Math.abs(randnum - detected_randnum) < 0.0001);
         }
     }
+    base_damage = (base_damage / ((CARD_bonus_all + CARD_bonus) / 100));
+    console.log(base_damage);
     for (const sDEF of sDEF_array) {
         for (const ATK_buff of ATK_buff_array) {
             for (const CARD_buff of CARD_buff_array) {
                 for (const s_buff of s_buff_array) {
                     DMG = base_damage
-                        * (100 + CARD_buff) / 100 // 色バフデバフ
+                        * (CARD_bonus / 100 * (100 + CARD_buff) / 100 + CARD_bonus_all / 100)
                         * (100 + ATK_buff) / 100 // 攻撃バフ防御デバフ
                         * Math.max((100 + s_buff), 0.1) / 100
                         * Math.max(0, 1.0 - Math.min(5.0, Math.max(0, 1.0 + sDEF / 100) - 1.0)) // 特殊耐性
@@ -159,6 +163,13 @@ function detect_buff(base_damage, fixed_damage, actual_damage,
 };
 
 function detect_buff_main() {
+    console.log('start');
+    var CARD_bonus_array = [[150, 180, 210], [100, 120, 140], [80, 96, 112], [100, 100, 100]];
+    var CARD_bonus_all = 0;
+    var CARD_order = document.detect_buff.CARD_order.value; console.log(CARD_order);
+    var CARD_type = document.detect_buff.CARD_type.value; console.log(CARD_type);
+    var CARD_bonus = CARD_bonus_array[CARD_type][CARD_order]; console.log(CARD_bonus);
+    if (document.detect_buff.Buster_start.checked & CARD_type != 3) { CARD_bonus_all = 50; } console.log(CARD_bonus_all);
     var small_steps = [document.detect_buff.ATK_buff_smallsteps.checked,
     document.detect_buff.CARD_buff_smallsteps.checked,
     document.detect_buff.s_buff_smallsteps.checked,
@@ -167,6 +178,8 @@ function detect_buff_main() {
     var result = detect_buff(parseFloat(document.detect_buff.base_damage.value),
         parseFloat(document.detect_buff.fixed_damage.value),
         parseFloat(document.detect_buff.actual_damage.value),
+        CARD_bonus,
+        CARD_bonus_all,
         parseFloat(document.detect_buff.ATK_buff.value),
         parseFloat(document.detect_buff.CARD_buff.value),
         parseFloat(document.detect_buff.s_buff.value),
@@ -215,3 +228,4 @@ function rounddown(num, digit) {
 // detect_buff(54917.5140, 0, 129187, 20, 0, 140, 20, NaN);
 // detect_buff(63102.6045, 0, 1376756, 100, 46, NaN, NaN, NaN, [false, false, true, false])
 // detect_buff(64803.4200, 0, 991719, 109.4, NaN, NaN, 0, NaN, [false, false, true, false])
+// detect_buff(5017.6427, 0, 3530, 140, 50, 0, 10, NaN, NaN, 0.993);
