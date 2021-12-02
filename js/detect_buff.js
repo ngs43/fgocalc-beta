@@ -132,7 +132,7 @@ function detect_buff(base_damage, fixed_damage, actual_damage, CARD_bonus = 100,
             return (Math.abs(randnum - detected_randnum) < 0.0001);
         }
     }
-    base_damage = (base_damage / ((CARD_bonus_all + CARD_bonus) / 100));
+    // base_damageにはfixed_damageが足されていることを前提にする
     base_damage = ((base_damage - fixed_damage) / ((CARD_bonus_all + CARD_bonus) / 100));
     console.log(base_damage);
     for (const sDEF of sDEF_array) {
