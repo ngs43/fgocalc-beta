@@ -1,0 +1,19 @@
+{
+    "ATK": 12345,
+    "NPmagnification": 1800,
+    "NPcard": "Quick",
+    "class": "騎",
+    "ATKbuff": 1,
+    "DEFdebuff": 2,
+    "ArtsCARDbuff": 3,
+    "BusterCARDbuff": 4,
+    "QuickCARDbuff": 5,
+    "ArtsCARDdebuff": 6,
+    "BusterCARDdebuff": 7,
+    "QuickCARDdebuff": 8,
+    "spATKbuff": 9,
+    "spDEFdebuff": 10,
+    "NPbuff": 11,
+    "spNPbuff1": 112,
+    "spNPbuff2": 113
+}

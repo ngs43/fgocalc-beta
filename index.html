@@ -16,6 +16,7 @@
     <script charset="UTF-8" type="text/javascript" src="js/main.js"></script>
     <script charset="UTF-8" type="text/javascript" src="js/detect_buff.js"></script>
     <script charset="UTF-8" type="text/javascript" src="js/test.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="js/jsonify.js"></script>
     <base target="_blank">
 </head>
 
@@ -31,8 +32,10 @@
 
 <body>
     <div id="site">
-        <div id="top">
+        <div id="top" align="right">
             <!-- <h1>FGO ダメージ計算【Fate/Grand Order】</h1> -->
+            <a href="">ほしいものリスト</a>　<a href="https://github.com/keinoda/fgocalc">Github</a>　<a
+                href="https://twitter.com/ngs_fgo">Twitter</a>
         </div>
         <div id="center">
             <div id="topmain">
@@ -78,34 +81,51 @@
                         </select><br><br>
                         カード種類：
                         <select name="card">
-                            <option value="1.5" selected>Buster</option>
-                            <option value="1.0">Arts</option>
-                            <option value="0.8">Quick</option>
+                            <option value="Buster" selected>Buster</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Quick">Quick</option>
                         </select>　
                         クラス補正：
                         <select name="class2">
-                            <option value="1.0" selected>剣</option>
-                            <option value="0.95">弓</option>
-                            <option value="1.05">槍</option>
-                            <option value="1.0">騎</option>
-                            <option value="0.90">術</option>
-                            <option value="0.90">殺</option>
-                            <option value="1.10">狂</option>
-                            <option value="1.0">盾</option>
-                            <option value="1.10">裁定</option>
-                            <option value="1.10">復讐</option>
-                            <option value="1.0">分</option>
-                            <option value="1.0">詐</option>
-                            <option value="1.0">月・降</option>
+                            <option value="剣" selected>剣</option>
+                            <option value="弓">弓</option>
+                            <option value="槍">槍</option>
+                            <option value="騎">騎</option>
+                            <option value="術">術</option>
+                            <option value="殺">殺</option>
+                            <option value="狂">狂</option>
+                            <option value="盾">盾</option>
+                            <option value="裁">裁</option>
+                            <option value="讐">讐</option>
+                            <option value="分">分</option>
+                            <option value="詐">詐</option>
+                            <option value="月・降">月・降</option>
                         </select><br>
 
-                        <br><br>
+                        <br>
                         <span class="lowest">最低</span>：<output type="number" name="total2"></output>　
                         <span>平均</span>：<output type="number" name="total1"></output>　
                         <span class="highest">最高</span>：<output type="number" name="total3"></output>　　
                         <input type="button" class="button" value="計算" onClick="keisan(0)">
                         　　<input type="button" class="button" value="リセット">
                         　　<input type="button" class="button" value="計算(小数)" style="width:80px;" onClick="keisan(4)">
+                        <br><br><input class="file" name="myfile" type="file">
+
+                        <script>
+
+                            //Form要素を取得する
+                            var form = document.forms.NP;
+
+                            //ファイルが読み込まれた時の処理
+                            form.myfile.addEventListener('change', function (e) {
+
+                                var result = e.target.files[0];
+
+                                //読み込んだファイルの中身を取得する
+                                readNPFile(result);
+
+                            })
+                        </script>
                     </form>
                 </div>
 

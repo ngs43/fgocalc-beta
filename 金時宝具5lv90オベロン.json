@@ -1,0 +1,19 @@
+{
+    "ATK": 15712,
+    "NPmagnification": 1200,
+    "NPcard": "Buster",
+    "class": "狂",
+    "ATKbuff": 50,
+    "DEFdebuff": 0,
+    "ArtsCARDbuff": 0,
+    "BusterCARDbuff": 52,
+    "QuickCARDbuff": 0,
+    "ArtsCARDdebuff": 0,
+    "BusterCARDdebuff": 0,
+    "QuickCARDdebuff": 0,
+    "spATKbuff": 0,
+    "spDEFdebuff": 0,
+    "NPbuff": 220,
+    "spNPbuff1": 100,
+    "spNPbuff2": 100
+}

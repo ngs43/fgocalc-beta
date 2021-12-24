@@ -1,14 +1,19 @@
+var card_list = { "Buster": 1.5, "Arts": 1.0, "Quick": 0.8 };
+var class2_list = { "剣": 1.0, "弓": 0.95, "槍": 1.05, "騎": 1.0, "術": 0.9, "殺": 0.9, "狂": 1.1, "盾": 1.0, "裁": 1.0, "讐": 1.1, "分": 1.0, "詐": 1.0, "月・降": 1.0 }
+
 function keisan(display_digit) {
     var ATK, NPmu, card, CARDbuff, class1, class2, elemental, ATKbuff, DEFdebuff, sATKbuff, sDEFdebuff, NPbuff, sNPbuff1, sNPbuff2, fixed_damage, total1, total2, total3,
         CARDdebuff, sDEF;
 
-    ATK = parseFloat(document.NP.ATK.value); NPmu = parseFloat(document.NP.NPmu.value); card = parseFloat(document.NP.card.value);
-    CARDbuff = parseFloat(document.NP.CARDbuff.value); class1 = parseFloat(document.NP.class1.value); class2 = parseFloat(document.NP.class2.value);
+    ATK = parseFloat(document.NP.ATK.value); NPmu = parseFloat(document.NP.NPmu.value); card = document.NP.card.value;
+    CARDbuff = parseFloat(document.NP.CARDbuff.value); class1 = parseFloat(document.NP.class1.value); class2 = document.NP.class2.value;
     elemental = parseFloat(document.NP.elemental.value); ATKbuff = parseFloat(document.NP.ATKbuff.value); DEFdebuff = parseFloat(document.NP.DEFdebuff.value);
     sATKbuff = parseFloat(document.NP.sATKbuff.value); sDEFdebuff = parseFloat(document.NP.sDEFdebuff.value); NPbuff = parseFloat(document.NP.NPbuff.value);
     sNPbuff1 = parseFloat(document.NP.sNPbuff1.value); sNPbuff2 = parseFloat(document.NP.sNPbuff2.value); fixed_damage = parseFloat(document.NP.fixed_damage.value);
     CARDdebuff = parseFloat(document.NP.CARDdebuff.value); sDEF = parseFloat(document.NP.sDEF.value);
 
+    card = card_list[card];
+    class2 = class2_list[class2];
     if (ATKbuff > 400) { ATKbuff = 400 };
     if (ATKbuff < -100) { ATKbuff = -100 };
     if (DEFdebuff > 100) { DEFdebuff = 100 };
