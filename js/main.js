@@ -51,7 +51,8 @@ function keisan_NP(hit, N_A, Abonus, card_buff, Abonus_all, card_NP, enemy_rate,
     NP = 100 * (N_A * (Abonus / 100 * (100 + card_buff + card_debuff) / 100 + Abonus_all * card_NP / 100) * enemy_rate / 100 * (100 + getNP_buff) / 100) * Cri;
     // NP = Math.round(NP * 10);
     // NP = Math.floor(NP / 10);
-    NP = (Math.floor(NP) * (hit - OK) + Math.floor(1.5 * NP) * OK) / 100;
+    NP = Math.floor(NP)
+    NP = (NP * (hit - OK) + Math.floor(1.5 * NP) * OK) / 100;
     if (Cri == 2 && card_NP == 0) { NP = "" };
     return NP;
 };
