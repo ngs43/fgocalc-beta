@@ -1,5 +1,5 @@
 var card_list = { "Buster": 1.5, "Arts": 1.0, "Quick": 0.8 };
-var class2_list = { "剣": 1.0, "弓": 0.95, "槍": 1.05, "騎": 1.0, "術": 0.9, "殺": 0.9, "狂": 1.1, "盾": 1.0, "裁": 1.0, "讐": 1.1, "分": 1.0, "詐": 1.0, "月・降": 1.0 }
+var class2_list = { "剣": 1.0, "弓": 0.95, "槍": 1.05, "騎": 1.0, "術": 0.9, "殺": 0.9, "狂": 1.1, "盾": 1.0, "裁": 1.1, "讐": 1.1, "分": 1.0, "詐": 1.0, "月・降": 1.0 }
 
 function keisan(display_digit) {
     var ATK, NPmu, card, CARDbuff, class1, class2, elemental, ATKbuff, DEFdebuff, sATKbuff, sDEFdebuff, NPbuff, sNPbuff1, sNPbuff2, fixed_damage, total1, total2, total3,
