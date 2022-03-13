@@ -537,7 +537,7 @@ function copy_normal_result() {
         document.prob_calc.buff_Ex.value = 0;
     } else {
         document.prob_calc.DMG_Ex.value = parseFloat(document.DMG_normal.DMG_ave_EX.value);
-        document.prob_calc.buff_Ex.value = parseFloat(document.DMG_normal.fixed_damage_normal.value) + ATK_normal * Bchain_bonus_normal / 100;
+        document.prob_calc.buff_Ex.value = parseFloat(document.DMG_normal.fixed_damage_normal.value);
     };
 
 }
