@@ -125,8 +125,11 @@ function keisan_rate() {
     if (card_2nd == "T") { card_2nd = NPcard; card2nd_NP = 0; };
     if (card_3rd == "T") { card_3rd = NPcard; card3rd_NP = 0; };
 
-    if (card_1st == "Q") { Qbonus_all = 20; Qbonus_1st = 80; Abonus_1st = 100; buff_1st = Q_CARDbuff; hit_1st = Q_hit; debuff_1st = Q_CARDdebuff; };
-    if (card_1st == "A") { Abonus_all = 100; Qbonus_1st = 0; Abonus_1st = 300; buff_1st = A_CARDbuff; hit_1st = A_hit; debuff_1st = A_CARDdebuff; };
+    if ((card_1st != card_2nd && card_2nd != card_3rd && card_3rd != card_1st) || card_1st == "Q") { Qbonus_all = 20; }
+    if ((card_1st != card_2nd && card_2nd != card_3rd && card_3rd != card_1st) || card_1st == "A") { Abonus_all = 100; }
+
+    if (card_1st == "Q") { Qbonus_1st = 80; Abonus_1st = 100; buff_1st = Q_CARDbuff; hit_1st = Q_hit; debuff_1st = Q_CARDdebuff; };
+    if (card_1st == "A") { Qbonus_1st = 0; Abonus_1st = 300; buff_1st = A_CARDbuff; hit_1st = A_hit; debuff_1st = A_CARDdebuff; };
     if (card_1st == "B") { Qbonus_1st = 10; Abonus_1st = 0; buff_1st = B_CARDbuff; hit_1st = B_hit; debuff_1st = B_CARDdebuff; };
 
     if (card_2nd == "Q") { Qbonus_2nd = 130; Abonus_2nd = 150; buff_2nd = Q_CARDbuff; hit_2nd = Q_hit; debuff_2nd = Q_CARDdebuff; };
@@ -270,9 +273,10 @@ function keisan_DMG_normal(display_digit) {
 
     Bbonus_all_normal = 0; Bchain_bonus_normal = 0; EXbonus_normal = 200;
 
+    if ((card_1st_normal != card_2nd_normal && card_2nd_normal != card_3rd_normal && card_3rd_normal != card_1st_normal) || card_1st_normal == "B") { Bbonus_all_normal = 50; }
     if (card_1st_normal == "Q") { Bbonus_1st_normal = 80; CARDbuff_1st_normal = Q_CARDbuff_normal; CARDdebuff_1st_normal = Q_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + Q_CARDCribuff_normal; };
     if (card_1st_normal == "A") { Bbonus_1st_normal = 100; CARDbuff_1st_normal = A_CARDbuff_normal; CARDdebuff_1st_normal = A_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + A_CARDCribuff_normal; };
-    if (card_1st_normal == "B") { Bbonus_all_normal = 50; Bbonus_1st_normal = 150; CARDbuff_1st_normal = B_CARDbuff_normal; CARDdebuff_1st_normal = B_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_1st_normal == "B") { Bbonus_1st_normal = 150; CARDbuff_1st_normal = B_CARDbuff_normal; CARDdebuff_1st_normal = B_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + B_CARDCribuff_normal; };
     if (card_2nd_normal == "Q") { Bbonus_2nd_normal = 96; CARDbuff_2nd_normal = Q_CARDbuff_normal; CARDdebuff_2nd_normal = Q_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
     if (card_2nd_normal == "A") { Bbonus_2nd_normal = 120; CARDbuff_2nd_normal = A_CARDbuff_normal; CARDdebuff_2nd_normal = A_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + A_CARDCribuff_normal; };
     if (card_2nd_normal == "B") { Bbonus_2nd_normal = 180; CARDbuff_2nd_normal = B_CARDbuff_normal; CARDdebuff_2nd_normal = B_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + B_CARDCribuff_normal; };
