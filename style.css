@@ -1,72 +1,72 @@
-  @charset "UTF-8";
-  html {height:100%;}
-  body {height:100%;}
-  *  { padding : 0px ; margin : 0px ; }
-  select {height:22px; width:75px; font-weight:bold;}
-  input {height:16px;}
-  input.button {height:22px; width:60px; cursor:pointer; font-weight:bold;}
-  input.file {height:30px; width:500px;}
-  form.NP {line-height: 1.5em; font-size:17px;}
-  table {border-collapse:collapse; text-align:center;}
-  td {border:solid 1px #000000; padding:0.5em; background-color:#f4fffa;}
-  th {border:solid 1px #000000; padding:0.5em; background-color:#e6e6fa;}
-  td.text {text-align:left;}
-  td.red {background-color:#ffb0b0;}
-  td.green {background-color:#75ff80;}
-  td.blue {background-color:#70d8ff;}
-  td.gray {background-color:#f8f8f8;}
-  h1 {color:#101090; text-shadow:-1px -1px #ffffff,1px -1px #ffffff,-1px 1px #ffffff,1px 1px #b0b0b0;}
-  h2 {font-size:26px;}
-  h3 {color:#1818d0; background-color:#b0e0ff; line-height:180%; border:solid 1px #808080}
-  th.number {color:#ffffff; background-color:#2060e8;}
-  div.servant {border:solid 4px #a0b0b0; padding:20px; margin:20px; background-color:#e1e1e1}
-  #site {width:1100px; border:2px solid #a0a0a0; margin: 0 auto;}
-  #top {width:1060px; height: 48px;  padding:20px; border-bottom:1px solid #a0a0a0; background: url(image/top-background-2.png) no-repeat;}
-  #center {overflow:hidden; width:1100px;}
-  #side {float:left; width:217px; padding:10px 2px 2px 4px; line-height: 1.8em;}
-  #main {float:right; width:1046px; border-left:1px solid #ff9900; background-color:#f2f2f2; padding:15px;}
-  #topside {float:left; width:217px; padding:10px 2px 2px 4px; line-height: 1.8em;  padding-bottom: 32000px; margin-bottom: -32000px;}
-  #topmain {background-color:#fef4fb;
-         padding:15px;  padding-bottom: 32000px; margin-bottom: -32000px;}
-  #space1 {width:180px; height:644px; background-color:#f2f2f2; text-align:center; padding:15px; font-size:14px; color:#ff9900;}
-  #space2 {width:160px; height:600px; background-color:#f2f2f2; text-align:center; padding:15px;}
-  .category {font-size:16px; color:#18189a; border:solid #b0e0ff; border-width:3px 5px 3px 5px; line-height:120%;}
-  li {font-size:13px; line-height: 1.5em; color:#18189a;}
-  ul {padding:0px 0px 0px 18px;}
-  #foot {clear:both; width:1240px; background-color:#d0f0ff; padding:15px 0px 15px 0px; border-top:1px solid#a0a0a0; text-align:center; font-size:14px;}
-  .menu {font-size:18px; color:#18189a; background-color:#b0e0ff; line-height:180%;}
-  summary {color:#18189a; font-size:15px; text-decoration: underline;}
-  output {width:95px; display:inline-block; background-color:#ffffff; border:solid 1px; height:22px; vertical-align: bottom; text-align:center;}
-  .topside { padding-bottom: 32000px; margin-bottom: -32000px;}
-  .topmain { padding-bottom: 32000px; margin-bottom: -32000px;}
-  #to_phone {font-size:20px; text-align:center; padding:25px 0px; color:#ffffff; background-color:#0050c0; font-weight:bold; box-shadow:3px 3px 10px #000000;}
-  div.rate_data {line-height: 1.5em; font-size:17px; float:left; width:260px;}
-  div.NP_Star {float:left; margin-left: 80px;}
-  table.rate_result td {width:88px;}
-  table.rate_result th {width:100px; padding:2px;}
-  table.prob_input td
-  select.card {width:80px;}
-  div.NP_Star output {width:55px; font-size:16px; text-align:center;}
-  tr.Star output {width:88px; font-size:14px; text-align:center; height:66px;}
-  div.damage {margin:0px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:580px;background-color:#fef4fb;}
-  div.rate {border:solid 4px #cbb3e7; padding:10px; height:560px; margin:30px 0px 10px 0px;background-color:#fef4fb;}
-  div.prob_calc {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:370px; background-color:#fef4fb;}
-  div.detect_buff {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:470px;}
-  div.split_damage {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:300px;}
-  p.policy {font-size:20px; border:dotted 2px; padding:3px;}
-  #policy_text {font-size:16px; line-height:1.5em;}
-  #info {font-size:13px; border:solid 2px #b0e0ff;  margin:5px 0px 20px 0px; }
-  .profile {padding:5px; background-color:#f2f2f2;}
-  .profile p {line-height:1.4em;}
-  div.DMG_normal_data {line-height: 1.5em; font-size:17px; float:left;}
-  div.DMG_normal_result {float:left; margin-left: 40px;}
-  div.damage_normal {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:570px;}
-  table.DMG_normal_result td {width:82px; padding:5px;}
-  table.DMG_normal_result th {width:68px; padding:2px;}
-  table.prob_input td {width:100px; padding:5px;}
-  /* table.prob_input th {width:130px; padding:2px;} */
-  table.prob_input input {width:90px;}
-  div.damage_normal output {width:88px; font-size:16px; text-align:center;}
+@charset "UTF-8";
+html {height:100%;}
+body {height:100%;}
+*  { padding : 0px ; margin : 0px ; }
+select {height:22px; width:75px; font-weight:bold;}
+input {height:16px;}
+input.button {height:22px; width:60px; cursor:pointer; font-weight:bold;}
+input.file {height:30px; width:500px;}
+form.NP {line-height: 1.5em; font-size:17px;}
+table {border-collapse:collapse; text-align:center;}
+td {border:solid 1px #000000; padding:0.5em; background-color:#f4fffa;}
+th {border:solid 1px #000000; padding:0.5em; background-color:#e6e6fa;}
+td.text {text-align:left;}
+td.red {background-color:#ffb0b0;}
+td.green {background-color:#75ff80;}
+td.blue {background-color:#70d8ff;}
+td.gray {background-color:#f8f8f8;}
+h1 {color:#101090; text-shadow:-1px -1px #ffffff,1px -1px #ffffff,-1px 1px #ffffff,1px 1px #b0b0b0;}
+h2 {font-size:26px;}
+h3 {color:#1818d0; background-color:#b0e0ff; line-height:180%; border:solid 1px #808080}
+th.number {color:#ffffff; background-color:#2060e8;}
+div.servant {border:solid 4px #a0b0b0; padding:20px; margin:20px; background-color:#e1e1e1}
+#site {width:1100px; border:2px solid #a0a0a0; margin: 0 auto;}
+#top {width:1060px; height: 48px;  padding:20px; border-bottom:1px solid #a0a0a0; background: url(image/top-background-2.png) no-repeat;}
+#center {overflow:hidden; width:1100px;}
+#side {float:left; width:217px; padding:10px 2px 2px 4px; line-height: 1.8em;}
+#main {float:right; width:1046px; border-left:1px solid #ff9900; background-color:#f2f2f2; padding:15px;}
+#topside {float:left; width:217px; padding:10px 2px 2px 4px; line-height: 1.8em;  padding-bottom: 32000px; margin-bottom: -32000px;}
+#topmain {background-color:#fef4fb;
+       padding:15px;  padding-bottom: 32000px; margin-bottom: -32000px;}
+#space1 {width:180px; height:644px; background-color:#f2f2f2; text-align:center; padding:15px; font-size:14px; color:#ff9900;}
+#space2 {width:160px; height:600px; background-color:#f2f2f2; text-align:center; padding:15px;}
+.category {font-size:16px; color:#18189a; border:solid #b0e0ff; border-width:3px 5px 3px 5px; line-height:120%;}
+li {font-size:13px; line-height: 1.5em; color:#18189a;}
+ul {padding:0px 0px 0px 18px;}
+#foot {clear:both; width:1240px; background-color:#d0f0ff; padding:15px 0px 15px 0px; border-top:1px solid#a0a0a0; text-align:center; font-size:14px;}
+.menu {font-size:18px; color:#18189a; background-color:#b0e0ff; line-height:180%;}
+summary {color:#18189a; font-size:15px; text-decoration: underline;}
+output {width:95px; display:inline-block; background-color:#ffffff; border:solid 1px; height:22px; vertical-align: bottom; text-align:center;}
+.topside { padding-bottom: 32000px; margin-bottom: -32000px;}
+.topmain { padding-bottom: 32000px; margin-bottom: -32000px;}
+#to_phone {font-size:20px; text-align:center; padding:25px 0px; color:#ffffff; background-color:#0050c0; font-weight:bold; box-shadow:3px 3px 10px #000000;}
+div.rate_data {line-height: 1.5em; font-size:17px; float:left; width:260px;}
+div.NP_Star {float:left; margin-left: 80px;}
+table.rate_result td {width:88px;}
+table.rate_result th {width:100px; padding:2px;}
+table.prob_input td
+select.card {width:80px;}
+div.NP_Star output {width:55px; font-size:16px; text-align:center;}
+tr.Star output {width:88px; font-size:14px; text-align:center; height:66px;}
+div.damage {margin:0px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:580px;background-color:#fef4fb;}
+div.rate {border:solid 4px #cbb3e7; padding:10px; height:560px; margin:30px 0px 10px 0px;background-color:#fef4fb;}
+div.prob_calc {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:370px; background-color:#fef4fb;}
+div.detect_buff {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:470px;}
+div.split_damage {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:300px;}
+p.policy {font-size:20px; border:dotted 2px; padding:3px;}
+#policy_text {font-size:16px; line-height:1.5em;}
+#info {font-size:13px; border:solid 2px #b0e0ff;  margin:5px 0px 20px 0px; }
+.profile {padding:5px; background-color:#f2f2f2;}
+.profile p {line-height:1.4em;}
+div.DMG_normal_data {line-height: 1.5em; font-size:17px; float:left;}
+div.DMG_normal_result {float:left; margin-left: 40px;}
+div.damage_normal {margin:30px 0px 0px 0px; border:solid 4px #cbb3e7; padding:10px; height:570px;background-color:#fef4fb;}
+table.DMG_normal_result td {width:82px; padding:5px;}
+table.DMG_normal_result th {width:68px; padding:2px;}
+table.prob_input td {width:100px; padding:5px;}
+/* table.prob_input th {width:130px; padding:2px;} */
+table.prob_input input {width:90px;}
+div.damage_normal output {width:88px; font-size:16px; text-align:center;}
 
-  .lowest {color: blue}
-  .highest {color: red}
+.lowest {color: blue}
+.highest {color: red}
