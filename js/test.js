@@ -42,7 +42,7 @@ console.log(formatDate(date));
 function chgImg(html) {
     var date = new Date();
     var capture = document.querySelector(html);
-    html2canvas(capture, { useCORS: true }).then(canvas => {
+    html2canvas(capture).then(canvas => {
         var base64 = canvas.toDataURL('image/png');
         $('#download').attr('href', base64);
         $('#download').attr('download', html.toString().slice(1) + formatDate(date) + ".png" );
