@@ -17,6 +17,7 @@
     <script charset="UTF-8" type="text/javascript" src="js/detect_buff.js"></script>
     <script charset="UTF-8" type="text/javascript" src="js/test.js"></script>
     <script charset="UTF-8" type="text/javascript" src="js/jsonify.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <base target="_blank">
 </head>
 
@@ -32,15 +33,15 @@
 
 <body>
     <div id="site">
+        <a id="download" href="#" download=""></a>
         <div id="top" align="right">
             <!-- <h1>FGO ダメージ計算【Fate/Grand Order】</h1> -->
-            <a href="https://github.com/keinoda/fgocalc">Github</a>　<a
-                href="https://twitter.com/ngs_fgo">Twitter</a>
+            <a href="https://github.com/keinoda/fgocalc">Github</a>　<a href="https://twitter.com/ngs_fgo">Twitter</a>
         </div>
         <div id="center">
             <div id="topmain">
-                <div class="damage">
-                    <h2>宝具ダメージ計算</h2><br>
+                <div class="damage" id="damage">
+                    <h2>宝具ダメージ計算<input type="button" class="button" value="画像保存" onclick="chgImg('#damage')"></h2><br>
 
                     <form name="NP" class="NP">
                         ATK：<input type="number" name="ATK" min="0" step="1" style="width:60px;"><br>
@@ -129,8 +130,8 @@
                     </form>
                 </div>
 
-                <div class="damage_normal">
-                    <h2>通常ダメージ計算</h2>
+                <div class="damage_normal" id="damage_normal">
+                    <h2>通常ダメージ計算<input type="button" class="button" value="画像保存" onclick="chgImg('#damage_normal')"></h2>
                     <br>
 
                     <form name="DMG_normal" class="DMG_normal">
@@ -333,8 +334,8 @@
                     </form>
                 </div>
 
-                <div class="prob_calc">
-                    <h2>撃破率 計算</h2>
+                <div class="prob_calc" id="prob_calc">
+                    <h2>撃破率 計算<input type="button" class="button" value="画像保存" onclick="chgImg('#prob_calc')"></h2>
                     <br>
 
                     <form name="prob_calc">
@@ -401,8 +402,8 @@
                     </form>
                 </div>
 
-                <div class="rate">
-                    <h2>NP・スター　計算</h2>
+                <div class="rate" id="rate">
+                    <h2>NP・スター　計算<input type="button" class="button" value="画像保存" onclick="chgImg('#rate')"></h2>
                     <br>
                     <form name="rate">
                         <div class="rate_data">
