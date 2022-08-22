@@ -36,7 +36,7 @@
         <a id="download" href="#" download=""></a>
         <div id="top" align="right">
             <!-- <h1>FGO ダメージ計算【Fate/Grand Order】</h1> -->
-            <a href="https://github.com/keinoda/fgocalc">Github</a>　<a href="https://twitter.com/ngs_fgo">Twitter</a>
+            <a href="https://github.com/keinoda/fgocalc">Github</a>　<input type="button" class="button" style="width:100px;" value="全体を画像化" onclick="chgImg('#center')"></a>
         </div>
         <div id="center">
             <div id="topmain">
@@ -131,7 +131,8 @@
                 </div>
 
                 <div class="damage_normal" id="damage_normal">
-                    <h2>通常ダメージ計算<input type="button" class="button" value="画像保存" onclick="chgImg('#damage_normal')"></h2>
+                    <h2>通常ダメージ計算<input type="button" class="button" value="画像保存" onclick="chgImg('#damage_normal')">
+                    </h2>
                     <br>
 
                     <form name="DMG_normal" class="DMG_normal">
@@ -621,11 +622,8 @@
                                     style="left: 20px;"></textarea>
 
                     </div>　　
-
                 </details>
-                </form>
             </div>
-
         </div>
     </div>
     </div>

@@ -44,8 +44,6 @@ function chgImg(html) {
     var capture = document.querySelector(html);
     html2canvas(capture, { useCORS: true }).then(canvas => {
         var base64 = canvas.toDataURL('image/png');
-        document.body.appendChild(canvas);
-        // $('#image').attr("src", base64);     //画面に画像表示
         $('#download').attr('href', base64);
         $('#download').attr('download', html.toString().slice(1) + formatDate(date) + ".png" );
         $('#download')[0].click();             //自動ダウンロード
