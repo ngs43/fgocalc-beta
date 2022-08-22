@@ -26,28 +26,3 @@ function split_damage_main() {
     document.split_damage.split_damage_result.value = result;
 }
 console.log(split_damage(371094, split_damage_list(8)));
-
-var date = new Date();
-
-const formatDate = (current_datetime) => {
-    let formatted_date = current_datetime.getFullYear()
-        + (current_datetime.getMonth() + 1).toString().padStart(2, "0")
-        + current_datetime.getDate().toString().padStart(2, "0")
-        + current_datetime.getHours().toString().padStart(2, "0")
-        + current_datetime.getMinutes().toString().padStart(2, "0")
-        + current_datetime.getSeconds().toString().padStart(2, "0");
-    return formatted_date;
-}
-
-console.log(formatDate(date));
-
-function chgImg(html) {
-    var capture = document.querySelector(html);
-    html2canvas(capture, { useCORS: true }).then(canvas => {
-        var base64 = canvas.toDataURL('image/png');
-        // $('#image').attr("src", base64);     //画面に画像表示
-        $('#download').attr('href', base64);
-        $('#download').attr('download', html.toString().slice(1) + formatDate(date) + ".png" );
-        $('#download')[0].click();             //自動ダウンロード
-    });
-}
