@@ -27,8 +27,6 @@ function split_damage_main() {
 }
 console.log(split_damage(371094, split_damage_list(8)));
 
-var date = new Date();
-
 const formatDate = (current_datetime) => {
     let formatted_date = current_datetime.getFullYear()
         + (current_datetime.getMonth() + 1).toString().padStart(2, "0")
@@ -42,9 +40,11 @@ const formatDate = (current_datetime) => {
 console.log(formatDate(date));
 
 function chgImg(html) {
+    var date = new Date();
     var capture = document.querySelector(html);
     html2canvas(capture, { useCORS: true }).then(canvas => {
         var base64 = canvas.toDataURL('image/png');
+        document.body.appendChild(canvas);
         // $('#image').attr("src", base64);     //画面に画像表示
         $('#download').attr('href', base64);
         $('#download').attr('download', html.toString().slice(1) + formatDate(date) + ".png" );
