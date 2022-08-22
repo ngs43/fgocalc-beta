@@ -3,7 +3,7 @@ html {height:100%;}
 body {height:100%;}
 *  { font-family: sans-serif; padding : 0px ; margin : 0px ; }
 select {height:22px; width:75px; font-weight:bold; border:solid 1px gray; border-radius: 3px;}
-input {height:19px; font-size: 13.3px; display:inline; vertical-align: middle; border:solid 1px gray; border-radius: 3px;}
+input {height:19px; font-size: 13.3px; display:inline; vertical-align: baseline; border:solid 1px gray; border-radius: 3px;}
 input.button {height:22px; width:60px; cursor:pointer; font-weight:bold;}
 input.file {height:30px; width:500px;}
 form.NP {line-height: 1.5em; font-size:17px;}
