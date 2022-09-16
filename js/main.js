@@ -1,5 +1,13 @@
 var card_list = { "Buster": 1.5, "Arts": 1.0, "Quick": 0.8 };
 var class2_list = { "剣": 1.0, "弓": 0.95, "槍": 1.05, "騎": 1.0, "術": 0.9, "殺": 0.9, "狂": 1.1, "盾": 1.0, "裁": 1.1, "讐": 1.1, "分": 1.0, "詐": 1.0, "月・降": 1.0 }
+var storage;
+
+window.addEventListener("load", function () {
+    // formstrageを作成
+    storage = new FormStorage('.DMG_np_normal', {
+        name: 'dmg_np_normal'
+    });
+});
 
 function keisan(display_digit) {
     var ATK, NPmu, card, CARDbuff, class1, class2, elemental, ATKbuff, DEFdebuff, sATKbuff, sDEFdebuff, NPbuff, sNPbuff1, sNPbuff2, fixed_damage, total1, total2, total3,
@@ -428,6 +436,302 @@ function keisan_DMG_normal(display_digit) {
     document.DMG_normal.DMG_high_total.value = Math.floor(DMG_high_1st) + Math.floor(DMG_high_2nd) + Math.floor(DMG_high_3rd) + Math.floor(DMG_high_EX);
     document.DMG_normal.DMG_low_total.value = Math.floor(DMG_low_1st) + Math.floor(DMG_low_2nd) + Math.floor(DMG_low_3rd) + Math.floor(DMG_low_EX);
 
+};
+
+function keisan_DMG_np_normal(display_digit) {
+    var ATK_normal, NP_dmg, NP_card, card_1st_normal, card_2nd_normal, card_3rd_normal, Q_CARDbuff_normal, A_CARDbuff_normal, B_CARDbuff_normal, class1_normal, class2_normal,
+        elemental_normal, ATKbuff_normal, DEFdebuff_normal, sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal,
+        Bbonus_1st_normal, Bbonus_2nd_normal, Bbonus_3rd_normal, EXbonus_normal, Bbonus_all_normal, Bchain_bonus_normal,
+        CARDbuff_1st_normal, CARDbuff_2nd_normal, CARDbuff_3rd_normal, Cribuff_normal, Q_CARDdebuff_normal, A_CARDdebuff_normal, B_CARDdebuff_normal,
+        CARDdebuff_1st_normal, CARDdebuff_2nd_normal, CARDdebuff_3rd_normal, EXATKbuff_normal,
+        Q_CARDCribuff_normal, A_CARDCribuff_normal, B_CARDCribuff_normal,
+        Cribuff_1st_normal, Cribuff_2nd_normal, Cribuff_3rd_normal,
+        is_card_1st_Cri, is_card_2nd_Cri, is_card_3rd_Cri, is_card_Ex_Cri,
+        DMG_ave_1st, DMG_ave_2nd, DMG_ave_3rd, DMG_ave_EX,
+        DMG_high_1st, DMG_high_2nd, DMG_high_3rd, DMG_high_EX,
+        DMG_low_1st, DMG_low_2nd, DMG_low_3rd, DMG_low_EX,
+        DMG_Cri_ave_1st, DMG_Cri_ave_2nd, DMG_Cri_ave_3rd,
+        DMG_Cri_high_1st, DMG_Cri_high_2nd, DMG_Cri_high_3rd,
+        DMG_Cri_low_1st, DMG_Cri_low_2nd, DMG_Cri_low_3rd,
+        sDEF_normal, NP_card_buff, NP_card_debuff;
+
+    ATK_normal = parseFloat(document.DMG_np_normal.ATK_np_normal.value);
+    card_1st_normal = document.DMG_np_normal.card_1st_np_normal.value;
+    card_2nd_normal = document.DMG_np_normal.card_2nd_np_normal.value;
+    card_3rd_normal = document.DMG_np_normal.card_3rd_np_normal.value;
+    is_card_1st_Cri = document.DMG_np_normal.is_card_1st_Cri_np_normal.value;
+    is_card_2nd_Cri = document.DMG_np_normal.is_card_2nd_Cri_np_normal.value;
+    is_card_3rd_Cri = document.DMG_np_normal.is_card_3rd_Cri_np_normal.value;
+    is_card_Ex_Cri = document.DMG_np_normal.is_card_Ex_Cri_np_normal.value;
+    Cribuff_normal = parseFloat(document.DMG_np_normal.Cribuff_np_normal.value);
+    Q_CARDbuff_normal = parseFloat(document.DMG_np_normal.Q_CARDbuff_np_normal.value);
+    A_CARDbuff_normal = parseFloat(document.DMG_np_normal.A_CARDbuff_np_normal.value);
+    B_CARDbuff_normal = parseFloat(document.DMG_np_normal.B_CARDbuff_np_normal.value);
+    Q_CARDCribuff_normal = parseFloat(document.DMG_np_normal.Q_CARDCribuff_np_normal.value);
+    A_CARDCribuff_normal = parseFloat(document.DMG_np_normal.A_CARDCribuff_np_normal.value);
+    B_CARDCribuff_normal = parseFloat(document.DMG_np_normal.B_CARDCribuff_np_normal.value);
+    class1_normal = parseFloat(document.DMG_np_normal.class1_np_normal.value); class2_normal = parseFloat(document.DMG_np_normal.class2_np_normal.value);
+    elemental_normal = parseFloat(document.DMG_np_normal.elemental_np_normal.value); ATKbuff_normal = parseFloat(document.DMG_np_normal.ATKbuff_np_normal.value);
+    DEFdebuff_normal = parseFloat(document.DMG_np_normal.DEFdebuff_np_normal.value);
+    sATKbuff_normal = parseFloat(document.DMG_np_normal.sATKbuff_np_normal.value); sDEFdebuff_normal = parseFloat(document.DMG_np_normal.sDEFdebuff_np_normal.value);
+    fixed_damage_normal = parseFloat(document.DMG_np_normal.fixed_damage_np_normal.value);
+    Q_CARDdebuff_normal = parseFloat(document.DMG_np_normal.Q_CARDdebuff_np_normal.value);
+    A_CARDdebuff_normal = parseFloat(document.DMG_np_normal.A_CARDdebuff_np_normal.value);
+    B_CARDdebuff_normal = parseFloat(document.DMG_np_normal.B_CARDdebuff_np_normal.value);
+    EXATKbuff_normal = parseFloat(document.DMG_np_normal.EXATKbuff_np_normal.value);
+    sDEF_normal = parseFloat(document.DMG_np_normal.sDEF_np_normal.value);
+    NP_dmg = document.DMG_np_normal.NP_dmg_np_normal.value;
+    NP_card = document.DMG_np_normal.NP_card_np_normal.value;
+    NPbuff = document.DMG_np_normal.NPbuff_np_normal.value;
+    sNPbuff1 = document.DMG_np_normal.sNPbuff1_np_normal.value;
+    sNPbuff2 = document.DMG_np_normal.sNPbuff2_np_normal.value;
+
+    if (Q_CARDbuff_normal > 400) { Q_CARDbuff_normal = 400 };
+    if (A_CARDbuff_normal > 400) { A_CARDbuff_normal = 400 };
+    if (B_CARDbuff_normal > 400) { B_CARDbuff_normal = 400 };
+    if (EXATKbuff_normal > 400) { EXATKbuff_normal = 400 };
+    if (ATKbuff_normal > 400) { ATKbuff_normal = 400 };
+    if (ATKbuff_normal < -100) { ATKbuff_normal = -100 };
+    if (DEFdebuff_normal > 100) { DEFdebuff_normal = 100 };
+    if (sATKbuff_normal > 1000) { sATKbuff_normal = 1000 };
+    if (sDEFdebuff_normal > 500) { sDEFdebuff_normal = 500 };
+    if (Cribuff_normal > 500) { Cribuff_normal = 500 };
+
+    Bbonus_all_normal = 0; Bchain_bonus_normal = 0; EXbonus_normal = 200;
+
+    if (card_1st_normal == "Q") { Bbonus_1st_normal = 80; CARDbuff_1st_normal = Q_CARDbuff_normal; CARDdebuff_1st_normal = Q_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_1st_normal == "A") { Bbonus_1st_normal = 100; CARDbuff_1st_normal = A_CARDbuff_normal; CARDdebuff_1st_normal = A_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_1st_normal == "B") { Bbonus_all_normal = 50; Bbonus_1st_normal = 150; CARDbuff_1st_normal = B_CARDbuff_normal; CARDdebuff_1st_normal = B_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_1st_normal == "NP" && NP_card == "Quick") { NP_card_buff = Q_CARDbuff_normal; NP_card_debuff = Q_CARDdebuff_normal; Bbonus_1st_normal = 80; CARDbuff_1st_normal = Q_CARDbuff_normal; CARDdebuff_1st_normal = Q_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_1st_normal == "NP" && NP_card == "Arts") { NP_card_buff = A_CARDbuff_normal; NP_card_debuff = A_CARDdebuff_normal; Bbonus_1st_normal = 100; CARDbuff_1st_normal = A_CARDbuff_normal; CARDdebuff_1st_normal = A_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_1st_normal == "NP" && NP_card == "Buster") { NP_card_buff = B_CARDbuff_normal; NP_card_debuff = B_CARDdebuff_normal; Bbonus_all_normal = 50; Bbonus_1st_normal = 150; CARDbuff_1st_normal = B_CARDbuff_normal; CARDdebuff_1st_normal = B_CARDdebuff_normal; Cribuff_1st_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_2nd_normal == "Q") { Bbonus_2nd_normal = 96; CARDbuff_2nd_normal = Q_CARDbuff_normal; CARDdebuff_2nd_normal = Q_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_2nd_normal == "A") { Bbonus_2nd_normal = 120; CARDbuff_2nd_normal = A_CARDbuff_normal; CARDdebuff_2nd_normal = A_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_2nd_normal == "B") { Bbonus_2nd_normal = 180; CARDbuff_2nd_normal = B_CARDbuff_normal; CARDdebuff_2nd_normal = B_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_2nd_normal == "NP" && NP_card == "Quick") { NP_card_buff = Q_CARDbuff_normal; NP_card_debuff = Q_CARDdebuff_normal; Bbonus_2nd_normal = 96; CARDbuff_2nd_normal = Q_CARDbuff_normal; CARDdebuff_2nd_normal = Q_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_2nd_normal == "NP" && NP_card == "Arts") { NP_card_buff = A_CARDbuff_normal; NP_card_debuff = A_CARDdebuff_normal; Bbonus_2nd_normal = 120; CARDbuff_2nd_normal = A_CARDbuff_normal; CARDdebuff_2nd_normal = A_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_2nd_normal == "NP" && NP_card == "Buster") { NP_card_buff = B_CARDbuff_normal; NP_card_debuff = B_CARDdebuff_normal; Bbonus_2nd_normal = 180; CARDbuff_2nd_normal = B_CARDbuff_normal; CARDdebuff_2nd_normal = B_CARDdebuff_normal; Cribuff_2nd_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_3rd_normal == "Q") { Bbonus_3rd_normal = 112; CARDbuff_3rd_normal = Q_CARDbuff_normal; CARDdebuff_3rd_normal = Q_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_3rd_normal == "A") { Bbonus_3rd_normal = 140; CARDbuff_3rd_normal = A_CARDbuff_normal; CARDdebuff_3rd_normal = A_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_3rd_normal == "B") { Bbonus_3rd_normal = 210; CARDbuff_3rd_normal = B_CARDbuff_normal; CARDdebuff_3rd_normal = B_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + B_CARDCribuff_normal; };
+    if (card_3rd_normal == "NP" && NP_card == "Quick") { NP_card_buff = Q_CARDbuff_normal; NP_card_debuff = Q_CARDdebuff_normal; Bbonus_3rd_normal = 112; CARDbuff_3rd_normal = Q_CARDbuff_normal; CARDdebuff_3rd_normal = Q_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + Q_CARDCribuff_normal; };
+    if (card_3rd_normal == "NP" && NP_card == "Arts") { NP_card_buff = A_CARDbuff_normal; NP_card_debuff = A_CARDdebuff_normal; Bbonus_3rd_normal = 140; CARDbuff_3rd_normal = A_CARDbuff_normal; CARDdebuff_3rd_normal = A_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + A_CARDCribuff_normal; };
+    if (card_3rd_normal == "NP" && NP_card == "Buster") { NP_card_buff = B_CARDbuff_normal; NP_card_debuff = B_CARDdebuff_normal; Bbonus_3rd_normal = 210; CARDbuff_3rd_normal = B_CARDbuff_normal; CARDdebuff_3rd_normal = B_CARDdebuff_normal; Cribuff_3rd_normal = Cribuff_normal + B_CARDCribuff_normal; };
+
+    if (card_1st_normal == "NP") {
+        if ((NP_card.slice(0, 1) != card_2nd_normal && card_2nd_normal != card_3rd_normal && card_3rd_normal != NP_card.slice(0, 1)) || NP_card.slice(0, 1) == "B") { Bbonus_all_normal = 50; }
+        if (NP_card.slice(0, 1) == card_2nd_normal && card_2nd_normal == card_3rd_normal && NP_card.slice(0, 1) == "B") { EXbonus_normal = 350; Bchain_bonus_normal = 20; }
+        if (NP_card.slice(0, 1) == card_2nd_normal && card_2nd_normal == card_3rd_normal) { EXbonus_normal = 350; };
+    } else if (card_2nd_normal == "NP") {
+        if ((card_1st_normal != NP_card.slice(0, 1) && NP_card.slice(0, 1) != card_3rd_normal && card_3rd_normal != card_1st_normal) || card_1st_normal == "B") { Bbonus_all_normal = 50; }
+        if (card_1st_normal == NP_card.slice(0, 1) && NP_card.slice(0, 1) == card_3rd_normal && card_1st_normal == "B") { EXbonus_normal = 350; Bchain_bonus_normal = 20; }
+        if (card_1st_normal == NP_card.slice(0, 1) && NP_card.slice(0, 1) == card_3rd_normal) { EXbonus_normal = 350; };
+    } else if (card_3rd_normal == "NP") {
+        if ((card_1st_normal != card_2nd_normal && card_2nd_normal != NP_card.slice(0, 1) && NP_card.slice(0, 1) != card_1st_normal) || card_1st_normal == "B") { Bbonus_all_normal = 50; }
+        if (card_1st_normal == card_2nd_normal && card_2nd_normal == NP_card.slice(0, 1) && card_1st_normal == "B") { EXbonus_normal = 350; Bchain_bonus_normal = 20; }
+        if (card_1st_normal == card_2nd_normal && card_2nd_normal == NP_card.slice(0, 1)) { EXbonus_normal = 350; };
+    } else {
+        if (card_1st_normal == card_2nd_normal && card_2nd_normal == card_3rd_normal && card_1st_normal == "B") { EXbonus_normal = 350; Bchain_bonus_normal = 20; }
+        if (card_1st_normal == card_2nd_normal && card_2nd_normal == card_3rd_normal) { EXbonus_normal = 350; };
+        if ((card_1st_normal != card_2nd_normal && card_2nd_normal != card_3rd_normal && card_3rd_normal != card_1st_normal) || card_1st_normal == "B") { Bbonus_all_normal = 50; }
+    };
+
+    if (card_1st_normal == "NP") {
+        DMG_ave_1st = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 1000);
+        DMG_low_1st = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 900);
+        DMG_high_1st = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 1099);
+    } else {
+        DMG_ave_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_1st_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        DMG_low_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            0.9, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_1st_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        DMG_high_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_1st_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        DMG_Cri_ave_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_1st_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        DMG_Cri_low_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            0.9, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_1st_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+        DMG_Cri_high_1st = keisan_DMG(ATK_normal, Bbonus_1st_normal, CARDbuff_1st_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1.099, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_1st_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_1st_normal, sDEF_normal);
+    };
+
+    if (card_2nd_normal == "NP") {
+        DMG_ave_2nd = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 1000);
+        DMG_low_2nd = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 900);
+        DMG_high_2nd = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 1099);
+    } else {
+        DMG_ave_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_2nd_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        DMG_low_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            0.9, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_2nd_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        DMG_high_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_2nd_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        DMG_Cri_ave_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_2nd_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        DMG_Cri_low_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            0.9, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_2nd_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+        DMG_Cri_high_2nd = keisan_DMG(ATK_normal, Bbonus_2nd_normal, CARDbuff_2nd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1.099, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_2nd_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_2nd_normal, sDEF_normal);
+    }
+
+    if (card_3rd_normal == "NP") {
+        DMG_ave_3rd = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 1000);
+        DMG_low_3rd = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 900);
+        DMG_high_3rd = keisan_NP_DMG(ATK_normal, NP_dmg, NP_card, NP_card_buff, class1_normal, class2_normal, elemental_normal, ATKbuff_normal, DEFdebuff_normal,
+            sATKbuff_normal, sDEFdebuff_normal, NPbuff, sNPbuff1, sNPbuff2, fixed_damage_normal, NP_card_debuff, sDEF_normal, 1099);
+    } else {
+        DMG_ave_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_3rd_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        DMG_low_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            0.9, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_3rd_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        DMG_high_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1.099, ATKbuff_normal, DEFdebuff_normal, 1, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_3rd_normal, 0, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        DMG_Cri_ave_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_3rd_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        DMG_Cri_low_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            0.9, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_3rd_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+        DMG_Cri_high_3rd = keisan_DMG(ATK_normal, Bbonus_3rd_normal, CARDbuff_3rd_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+            1.099, ATKbuff_normal, DEFdebuff_normal, 2, 100, sATKbuff_normal,
+            sDEFdebuff_normal, Cribuff_3rd_normal, 1, fixed_damage_normal, Bchain_bonus_normal, CARDdebuff_3rd_normal, sDEF_normal);
+    }
+
+    DMG_ave_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+        1, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
+        sDEFdebuff_normal, Cribuff_normal, 0, fixed_damage_normal, 0, 0, sDEF_normal);
+    DMG_low_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+        0.9, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
+        sDEFdebuff_normal, Cribuff_normal, 0, fixed_damage_normal, 0, 0, sDEF_normal);
+    DMG_high_EX = keisan_DMG(ATK_normal, 100, EXATKbuff_normal, Bbonus_all_normal, class1_normal, class2_normal, elemental_normal,
+        1.099, ATKbuff_normal, DEFdebuff_normal, 1, EXbonus_normal, sATKbuff_normal,
+        sDEFdebuff_normal, Cribuff_normal, 0, fixed_damage_normal, 0, 0, sDEF_normal);
+
+    if (card_1st_normal != "NP" && is_card_1st_Cri == "Y") {
+        DMG_ave_1st = DMG_Cri_ave_1st;
+        DMG_low_1st = DMG_Cri_low_1st;
+        DMG_high_1st = DMG_Cri_high_1st;
+    } else if (is_card_1st_Cri == "zero") {
+        DMG_ave_1st = 0;
+        DMG_low_1st = 0;
+        DMG_high_1st = 0;
+    };
+
+    if (card_2nd_normal != "NP" && is_card_2nd_Cri == "Y") {
+        DMG_ave_2nd = DMG_Cri_ave_2nd;
+        DMG_low_2nd = DMG_Cri_low_2nd;
+        DMG_high_2nd = DMG_Cri_high_2nd;
+    } else if (is_card_2nd_Cri == "zero") {
+        DMG_ave_2nd = 0;
+        DMG_low_2nd = 0;
+        DMG_high_2nd = 0;
+    };
+
+    if (card_3rd_normal != "NP" && is_card_3rd_Cri == "Y") {
+        DMG_ave_3rd = DMG_Cri_ave_3rd;
+        DMG_low_3rd = DMG_Cri_low_3rd;
+        DMG_high_3rd = DMG_Cri_high_3rd;
+    } else if (is_card_3rd_Cri == "zero") {
+        DMG_ave_3rd = 0;
+        DMG_low_3rd = 0;
+        DMG_high_3rd = 0;
+    };
+
+    if (is_card_Ex_Cri == "zero") {
+        DMG_ave_EX = 0;
+        DMG_low_EX = 0;
+        DMG_high_EX = 0;
+    };
+
+    document.DMG_np_normal.DMG_ave_1st_np_normal.value = rounddown(DMG_ave_1st, display_digit);
+    document.DMG_np_normal.DMG_low_1st_np_normal.value = rounddown(DMG_low_1st, display_digit);
+    document.DMG_np_normal.DMG_high_1st_np_normal.value = rounddown(DMG_high_1st, display_digit);
+    document.DMG_np_normal.DMG_ave_2nd_np_normal.value = rounddown(DMG_ave_2nd, display_digit);
+    document.DMG_np_normal.DMG_low_2nd_np_normal.value = rounddown(DMG_low_2nd, display_digit);
+    document.DMG_np_normal.DMG_high_2nd_np_normal.value = rounddown(DMG_high_2nd, display_digit);
+    document.DMG_np_normal.DMG_ave_3rd_np_normal.value = rounddown(DMG_ave_3rd, display_digit);
+    document.DMG_np_normal.DMG_low_3rd_np_normal.value = rounddown(DMG_low_3rd, display_digit);
+    document.DMG_np_normal.DMG_high_3rd_np_normal.value = rounddown(DMG_high_3rd, display_digit);
+    document.DMG_np_normal.DMG_ave_EX_np_normal.value = rounddown(DMG_ave_EX, display_digit);
+    document.DMG_np_normal.DMG_low_EX_np_normal.value = rounddown(DMG_low_EX, display_digit);
+    document.DMG_np_normal.DMG_high_EX_np_normal.value = rounddown(DMG_high_EX, display_digit);
+
+
+    document.DMG_np_normal.DMG_ave_total_np_normal.value = Math.floor(DMG_ave_1st) + Math.floor(DMG_ave_2nd) + Math.floor(DMG_ave_3rd) + Math.floor(DMG_ave_EX);
+    document.DMG_np_normal.DMG_high_total_np_normal.value = Math.floor(DMG_high_1st) + Math.floor(DMG_high_2nd) + Math.floor(DMG_high_3rd) + Math.floor(DMG_high_EX);
+    document.DMG_np_normal.DMG_low_total_np_normal.value = Math.floor(DMG_low_1st) + Math.floor(DMG_low_2nd) + Math.floor(DMG_low_3rd) + Math.floor(DMG_low_EX);
+
+};
+
+function keisan_NP_DMG(inp_ATK, inp_NP_dmg, inp_card, inp_CARDbuff, inp_class1, inp_class2, inp_elemental, inp_ATKbuff, inp_DEFdebuff, inp_sATKbuff, inp_sDEFdebuff
+    , inp_NPbuff, inp_sNPbuff1, inp_sNPbuff2, inp_fixed_damage, inp_CARDdebuff, inp_sDEF, inp_random) {
+    var ATK, NP_dmg, card, CARDbuff, class1, class2, elemental, ATKbuff, DEFdebuff, sATKbuff, sDEFdebuff, NPbuff, sNPbuff1, sNPbuff2, fixed_damage,
+        CARDdebuff, sDEF, total, DMG;
+
+    ATK = parseFloat(inp_ATK); NP_dmg = parseFloat(inp_NP_dmg); card = inp_card;
+    CARDbuff = parseFloat(inp_CARDbuff); class1 = parseFloat(inp_class1); class2 = inp_class2;
+    elemental = parseFloat(inp_elemental); ATKbuff = parseFloat(inp_ATKbuff); DEFdebuff = parseFloat(inp_DEFdebuff);
+    sATKbuff = parseFloat(inp_sATKbuff); sDEFdebuff = parseFloat(inp_sDEFdebuff); NPbuff = parseFloat(inp_NPbuff);
+    sNPbuff1 = parseFloat(inp_sNPbuff1); sNPbuff2 = parseFloat(inp_sNPbuff2); fixed_damage = parseFloat(inp_fixed_damage);
+    CARDdebuff = parseFloat(inp_CARDdebuff); sDEF = parseFloat(inp_sDEF);
+
+    card = card_list[card];
+    if (ATKbuff > 400) { ATKbuff = 400 };
+    if (ATKbuff < -100) { ATKbuff = -100 };
+    if (DEFdebuff > 100) { DEFdebuff = 100 };
+    if (CARDbuff > 400) { CARDbuff = 400 };
+    if (sATKbuff > 1000) { sATKbuff = 1000 };
+    if (sDEFdebuff > 500) { sDEFdebuff = 500 };
+    if (NPbuff > 500) { NPbuff = 500 };
+
+    total = (ATK * NP_dmg / 100
+        * 0.23 * card
+        * (100 + CARDbuff + CARDdebuff) / 100
+        * class1
+        * class2
+        * elemental
+        * (100 + ATKbuff + DEFdebuff) / 100
+        * Math.max((100 + sATKbuff + sDEFdebuff + NPbuff), 0.1) / 100
+        * sNPbuff1 / 100 * sNPbuff2 / 100);
+
+    total = total * Math.max(0, 1.0 - Math.min(5.0, Math.max(0, 1.0 + sDEF / 100) - 1.0)); // 特殊耐性への対応
+    total = total * inp_random / 1000;
+    DMG = total + fixed_damage;
+
+    return DMG
+};
+
+function buff_save() {
+    //フォームを保存
+    storage.save();
+};
+
+function buff_load() {
+    //フォームを復元
+    storage.apply();
 };
 
 function keisan_prob() {
