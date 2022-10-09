@@ -41,140 +41,111 @@
         <a id="download" href="#" download=""></a>
         <div id="top" align="right">
             <!-- <h1>FGO ダメージ計算【Fate/Grand Order】</h1> -->
-            <a href="https://github.com/keinoda/fgocalc">Github</a>　<input type="button" class="button" style="width:100px;" value="全体を画像化" onclick="chgImg('#center')"></a>
+            <a href="https://github.com/ngs43/fgocalc">Github</a>　<input type="button" class="button"
+                style="width:100px;" value="全体を画像化" onclick="chgImg('#center')"></a>
         </div>
         <div id="center">
             <div id="topmain">
-                <div class="damage" id="damage">
-                    <h2>宝具ダメージ計算</h2>
+                <div class="detect_buff">
+                    <h2>バフ・乱数推定　<span style="font-size: smaller;">→<a
+                                href="https://github.com/ngs43/fgocalc/#バフ乱数推定">使い方</a></span></h2>
                     <br>
-                    <form name="NP" class="NP">
-                        ATK：<input type="number" name="ATK" min="0" step="1" style="width:60px;"><br>
-                        宝具倍率：<input type="number" name="NPmu" min="0" step="50" style="width:50px;">％<br>
-                        攻撃力 バフ：<input type="number" name="ATKbuff" value="0" min="0" step="1" style="width:50px;">％<br>
-                        カード バフ：<input type="number" name="CARDbuff" value="0" min="0" step="1" style="width:50px;">％<br>
-                        カード耐性 デバフ：<input type="number" name="CARDdebuff" value="0" min="0" step="1"
-                            style="width:50px;">％<br>
-                        敵防御力 デバフ：<input type="number" name="DEFdebuff" value="0" min="0" step="1"
-                            style="width:50px;">％<br>
-                        特攻威力 バフ：<input type="number" name="sATKbuff" value="0" min="0" step="1"
-                            style="width:50px;">％<br>
-                        敵特防 デバフ：<input type="number" name="sDEFdebuff" value="0" min="0" step="1"
-                            style="width:50px;">％<br>
-                        宝具威力 バフ：<input type="number" name="NPbuff" value="0" min="0" step="1" style="width:50px;">％<br>
-                        宝具〔特性〕特攻威力：<input type="number" name="sNPbuff1" value="100" min="0" step="50"
-                            style="width:50px;">％　(初期100％)<br>
-                        宝具〔状態〕特攻威力：<input type="number" name="sNPbuff2" value="100" min="0" step="50"
-                            style="width:50px;">％　(初期100％)<br>
-                        固定ダメージ：<input type="number" name="fixed_damage" value="0" step="1" style="width:50px;"><br>
-                        敵特殊耐性：<input type="number" name="sDEF" value="0" min="-100" step="100" step="10"
-                            style="width:50px;">％<br><br>
-                        クラス相性：
-                        <select name="class1">
-                            <option value="1.0">等倍</option>
-                            <option value="2.0" selected>有利</option>
-                            <option value="0.5">不利</option>
-                            <option value="1.5">狂 有利</option>
-                            <option value="1.5">分 有利</option>
-                            <option value="1.5">詐 有利</option>
-                            <option value="1.2">分→獣&#8546;</option>
-                        </select>　
-                        属性相性：
-                        <select name="elemental">
-                            <option value="1.0" selected>等倍</option>
-                            <option value="1.1">有利</option>
-                            <option value="0.9">不利</option>
-                        </select><br><br>
-                        カード種類：
-                        <select name="card">
-                            <option value="Buster" selected>Buster</option>
-                            <option value="Arts">Arts</option>
-                            <option value="Quick">Quick</option>
-                        </select>　
-                        クラス補正：
-                        <select name="class2">
-                            <option value="剣" selected>剣</option>
-                            <option value="弓">弓</option>
-                            <option value="槍">槍</option>
-                            <option value="騎">騎</option>
-                            <option value="術">術</option>
-                            <option value="殺">殺</option>
-                            <option value="狂">狂</option>
-                            <option value="盾">盾</option>
-                            <option value="裁">裁</option>
-                            <option value="讐">讐</option>
-                            <option value="分">分</option>
-                            <option value="詐">詐</option>
-                            <option value="月・降">月・降</option>
-                        </select><br>
+                    
+                    <form name="detect_buff">
+                        <div class="detect_buff_input"></div>
+                        <a title="以下のバフを全て0にしたダメージを入力してください" style="color:#F00;
+                        text-decoration:underline;">基本ダメージ</a>：<input type="number" name="base_damage" value="0"
+                            min="0" step="1" width="95px;" display="inline-block;">　固定ダメージ：<input type="number"
+                            name="fixed_damage" value="0" min="0" step="1" width="95px;" display="inline-block;">　<input
+                            type="checkbox" name="Buster_start">
+                        <label for="Buster_start">B始動
+                            <select name="CARD_order" class="card">
+                                <option value="0">1枚目</option>
+                                <option value="1">2枚目</option>
+                                <option value="2">3枚目</option>
+                            </select>
+                            <select name="CARD_type" class="card">
+                                <option value="0">Buster</option>
+                                <option value="1">Arts</option>
+                                <option value="2">Quick</option>
+                                <option value="3">宝具</option>
+                            </select>
+                            <br>実機ダメージ：<input type="number" name="actual_damage" value="0" min="0" step="1"
+                                width="95px;" display="inline-block;"><br>
+                            <br>
+                            攻防バフ　：<input type="number" name="ATK_buff" min="0" step="10" style="width:60px;">％　　<input
+                                type="checkbox" name="ATK_buff_smallsteps">
+                            <label for="ATK_buff_smallsteps">1%刻みで検索</label><br>
+                            カードバフ：<input type="number" name="CARD_buff" min="0" step="10" style="width:60px;">％　　<input
+                                type="checkbox" name="CARD_buff_smallsteps">
+                            <label for="CARD_buff_smallsteps">1%刻みで検索</label><br>
+                            特攻バフ　：<input type="number" name="s_buff" min="0" step="10" style="width:60px;">％　　<input
+                                type="checkbox" name="s_buff_smallsteps">
+                            <label for="s_buff_smallsteps">1%刻みで検索</label><br>
+                            特殊耐性　：<input type="number" name="sDEF" min="0" step="10" style="width:60px;">％　　<input
+                                type="checkbox" name="sDEF_smallsteps">
+                            <label for="sDEF_smallsteps">1%刻みで検索</label><br>
+                            乱数　　　：<input type="number" name="randnum" min="0.900" max="1.099" step="0.001"
+                                style="width:60px;">（0.900〜1.099）
+                            　　　　　　<input type="button" class="button" value="計算" onClick="detect_buff_main()">
 
-                        <br>
-                        <span class="lowest">最低</span>：<output type="number" name="total2"></output>　
-                        <span>平均</span>：<output type="number" name="total1"></output>　
-                        <span class="highest">最高</span>：<output type="number" name="total3"></output>　　
-                        <input type="button" class="button" value="計算" onClick="keisan(0)">
-                        <!-- 　　<input type="reset" class="button" value="リセット"> -->
-                        　　<input type="button" class="button" value="計算(小数)" style="width:80px;" onClick="keisan(4)">
-                        <!-- <br><br><input class="file" name="myfile" type="file">
-
-                        <script>
-
-                            //Form要素を取得する
-                            var form = document.forms.NP;
-
-                            //ファイルが読み込まれた時の処理
-                            form.myfile.addEventListener('change', function (e) {
-
-                                var result = e.target.files[0];
-
-                                //読み込んだファイルの中身を取得する
-                                readNPFile(result);
-
-                            })
-                        </script> -->
+                            <br><br><textarea name="detect_result" cols="100" rows="10" readonly
+                                style="left: 20px;"></textarea>
                     </form>
-                </div>
+                </div>　　
 
-                <div class="damage_normal" id="damage_normal">
-                    <h2>通常ダメージ計算</h2>
+                <div class="damage_np_normal" id="damage_np_normal">
+                    <h2>宝具＆通常ダメージ計算</h2>
                     <br>
 
-                    <form name="DMG_normal" class="DMG_normal">
-                        <div class="DMG_normal_data">
-                            ATK：<input type="number" name="ATK_normal" min="0" step="500" style="width:60px;"><br>
-                            攻撃力 バフ：<input type="number" name="ATKbuff_normal" value="0" min="0" step="1"
+                    <form name="DMG_np_normal" class="DMG_np_normal">
+                        <div class="DMG_np_normal_data">
+                            ATK：<input type="number" name="ATK_np_normal" min="0" step="500" style="width:60px;"><br>
+                            宝具倍率：<input type="number" name="NP_dmg_np_normal" min="0" step="50" style="width:50px;">％
+                            種類：<select name="NP_card_np_normal">
+                                <option value="Quick">Quick</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Buster" selected>Buster</option>
+                            </select><br>
+                            攻撃力 バフ：<input type="number" name="ATKbuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            Q バフ：<input type="number" name="Q_CARDbuff_normal" value="0" min="0" step="1"
-                                style="width:40px;">％ クリバフ：<input type="number" name="Q_CARDCribuff_normal" value="0"
+                            Q バフ：<input type="number" name="Q_CARDbuff_np_normal" value="0" min="0" step="1"
+                                style="width:40px;">％ クリバフ：<input type="number" name="Q_CARDCribuff_np_normal" value="0"
                                 min="0" step="1" style="width:40px;">％<br>
-                            A バフ：<input type="number" name="A_CARDbuff_normal" value="0" min="0" step="1"
-                                style="width:40px;">％ クリバフ：<input type="number" name="A_CARDCribuff_normal" value="0"
+                            A バフ：<input type="number" name="A_CARDbuff_np_normal" value="0" min="0" step="1"
+                                style="width:40px;">％ クリバフ：<input type="number" name="A_CARDCribuff_np_normal" value="0"
                                 min="0" step="1" style="width:40px;">％<br>
-                            B バフ：<input type="number" name="B_CARDbuff_normal" value="0" min="0" step="1"
-                                style="width:40px;">％ クリバフ：<input type="number" name="B_CARDCribuff_normal" value="0"
+                            B バフ：<input type="number" name="B_CARDbuff_np_normal" value="0" min="0" step="1"
+                                style="width:40px;">％ クリバフ：<input type="number" name="B_CARDCribuff_np_normal" value="0"
                                 min="0" step="1" style="width:40px;">％<br>
-                            EXカード バフ：<input type="number" name="EXATKbuff_normal" value="0" min="0" step="1"
+                            EXカード バフ：<input type="number" name="EXATKbuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            Qカード耐性 デバフ：<input type="number" name="Q_CARDdebuff_normal" value="0" min="0" step="1"
+                            Qカード耐性 デバフ：<input type="number" name="Q_CARDdebuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            Aカード耐性 デバフ：<input type="number" name="A_CARDdebuff_normal" value="0" min="0" step="1"
+                            Aカード耐性 デバフ：<input type="number" name="A_CARDdebuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            Bカード耐性 デバフ：<input type="number" name="B_CARDdebuff_normal" value="0" min="0" step="1"
+                            Bカード耐性 デバフ：<input type="number" name="B_CARDdebuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            敵防御力 デバフ：<input type="number" name="DEFdebuff_normal" value="0" min="0" step="1"
+                            敵防御力 デバフ：<input type="number" name="DEFdebuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            クリティカル威力 バフ：<input type="number" name="Cribuff_normal" value="0" min="0" step="1"
+                            クリティカル威力 バフ：<input type="number" name="Cribuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            特攻威力 バフ：<input type="number" name="sATKbuff_normal" value="0" min="0" step="1"
+                            特攻威力 バフ：<input type="number" name="sATKbuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            敵特防 デバフ：<input type="number" name="sDEFdebuff_normal" value="0" min="0" step="1"
+                            敵特防 デバフ：<input type="number" name="sDEFdebuff_np_normal" value="0" min="0" step="1"
                                 style="width:50px;">％<br>
-                            固定ダメージ：<input type="number" name="fixed_damage_normal" value="0" step="1"
+                            宝具威力 バフ：<input type="number" name="NPbuff_np_normal" value="0" min="0" step="1"
+                                style="width:50px;">％<br>
+                            宝具〔特性〕特攻威力：<input type="number" name="sNPbuff1_np_normal" value="100" min="0" step="50"
+                                style="width:50px;">％<br>
+                            宝具〔状態〕特攻威力：<input type="number" name="sNPbuff2_np_normal" value="100" min="0" step="50"
+                                style="width:50px;">％<br>
+                            固定ダメージ：<input type="number" name="fixed_damage_np_normal" value="0" step="1"
                                 style="width:50px;"><br>
-                            敵特殊耐性：<input type="number" name="sDEF_normal" value="0" min="-100" step="10"
+                            敵特殊耐性：<input type="number" name="sDEF_np_normal" value="0" min="-100" step="10"
                                 style="width:50px;">％<br><br>
                             クラス相性：
-                            <select name="class1_normal">
+                            <select name="class1_np_normal">
                                 <option value="1.0">等倍</option>
                                 <option value="2.0" selected>有利</option>
                                 <option value="0.5">不利</option>
@@ -184,13 +155,13 @@
                                 <option value="1.2">分→獣&#8546;</option>
                             </select><br>
                             属性相性：
-                            <select name="elemental_normal">
+                            <select name="elemental_np_normal">
                                 <option value="1.0" selected>等倍</option>
                                 <option value="1.1">有利</option>
                                 <option value="0.9">不利</option>
                             </select><br>
                             クラス補正：
-                            <select name="class2_normal">
+                            <select name="class2_np_normal">
                                 <option value="1.0" selected>剣</option>
                                 <option value="0.95">弓</option>
                                 <option value="1.05">槍</option>
@@ -206,8 +177,8 @@
                                 <option value="1.0">月・降</option>
                             </select>
                         </div>
-                        <div class="DMG_normal_result">
-                            <table class="DMG_normal_result">
+                        <div class="DMG_np_normal_result">
+                            <table class="DMG_np_normal_result">
                                 <tr>
                                     <th style="height:32px;" colspan="2">　</th>
                                     <th>1st</th>
@@ -219,21 +190,24 @@
                                 <tr>
                                     <th style="height:40px" colspan="2">カード</th>
                                     <th>
-                                        <select name="card_1st_normal" class="card">
+                                        <select name="card_1st_np_normal" class="card">
+                                            <option value="NP">宝具</option>
                                             <option value="Q">Quick</option>
                                             <option value="A">Arts</option>
                                             <option value="B" selected>Buster</option>
                                         </select>
                                     </th>
                                     <th>
-                                        <select name="card_2nd_normal" class="card">
+                                        <select name="card_2nd_np_normal" class="card">
+                                            <option value="NP">宝具</option>
                                             <option value="Q">Quick</option>
                                             <option value="A">Arts</option>
                                             <option value="B" selected>Buster</option>
                                         </select>
                                     </th>
                                     <th>
-                                        <select name="card_3rd_normal" class="card">
+                                        <select name="card_3rd_np_normal" class="card">
+                                            <option value="NP">宝具</option>
                                             <option value="Q">Quick</option>
                                             <option value="A">Arts</option>
                                             <option value="B" selected>Buster</option>
@@ -245,30 +219,29 @@
                                 <tr>
                                     <th style="height:40px" colspan="2">クリティカル</th>
                                     <th>
-                                        <select name="is_card_1st_Cri" class="card">
+                                        <select name="is_card_1st_Cri_np_normal" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
                                             <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
-                                        <select name="is_card_2nd_Cri" class="card">
+                                        <select name="is_card_2nd_Cri_np_normal" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
                                             <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
-                                        <select name="is_card_3rd_Cri" class="card">
+                                        <select name="is_card_3rd_Cri_np_normal" class="card">
                                             <option value="N">なし</option>
                                             <option value="Y">あり</option>
                                             <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
                                     <th>
-                                        <select name="is_card_Ex_Cri" class="card">
+                                        <select name="is_card_Ex_Cri_np_normal" class="card">
                                             <option value="N">なし</option>
-                                            <!-- <option value="Y">あり</option> -->
                                             <option value="zero">ダメージ0</option>
                                         </select>
                                     </th>
@@ -278,573 +251,67 @@
                                     <th rowspan="3" style="width:100px">ダメージ</th>
                                     <th class="lowest">最低</th>
                                     <td>
-                                        <output type="number" name="DMG_low_1st"></output>
+                                        <output type="number" name="DMG_low_1st_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_low_2nd"></output>
+                                        <output type="number" name="DMG_low_2nd_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_low_3rd"></output>
+                                        <output type="number" name="DMG_low_3rd_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_low_EX"></output>
+                                        <output type="number" name="DMG_low_EX_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_low_total"></output>
+                                        <output type="number" name="DMG_low_total_np_normal"></output>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>平均</th>
                                     <td>
-                                        <output type="number" name="DMG_ave_1st"></output>
+                                        <output type="number" name="DMG_ave_1st_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_ave_2nd"></output>
+                                        <output type="number" name="DMG_ave_2nd_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_ave_3rd"></output>
+                                        <output type="number" name="DMG_ave_3rd_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_ave_EX"></output>
+                                        <output type="number" name="DMG_ave_EX_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_ave_total"></output>
+                                        <output type="number" name="DMG_ave_total_np_normal"></output>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="highest">最高</th>
                                     <td>
-                                        <output type="number" name="DMG_high_1st"></output>
+                                        <output type="number" name="DMG_high_1st_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_high_2nd"></output>
+                                        <output type="number" name="DMG_high_2nd_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_high_3rd"></output>
+                                        <output type="number" name="DMG_high_3rd_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_high_EX"></output>
+                                        <output type="number" name="DMG_high_EX_np_normal"></output>
                                     </td>
                                     <td>
-                                        <output type="number" name="DMG_high_total"></output>
+                                        <output type="number" name="DMG_high_total_np_normal"></output>
                                     </td>
                             </table>
 
                             <br><br>
-                            　　<input type="button" class="button" value="計算" onClick="keisan_DMG_normal(0)">
-                            <!-- 　　<input type="reset" class="button" value="リセット"> -->
+                            　　<input type="button" class="button" value="計算" onClick="keisan_DMG_np_normal(0)">
                             　　<input type="button" class="button" value="計算(小数)" style="width:80px;"
-                                onClick="keisan_DMG_normal(4)">
+                                onClick="keisan_DMG_np_normal(4)">
+                            　　<input type="button" class="button" value="バフ保存" onClick="buff_save()">
+                            　　<input type="button" class="button" value="バフ復元" onClick="buff_load()">
                         </div>
                     </form>
                 </div>
-
-                <div class="prob_calc" id="prob_calc">
-                    <h2>撃破率 計算</h2>
-                    <br>
-
-                    <form name="prob_calc">
-                        <div class="prob_input">
-                            目標ダメージ：<input type="number" name="enermy_hp" min="0" step="1" width="95px;"
-                                display="inline-block;">　　<input type="button" class="button" style="width:100px;"
-                                value="上の結果を代入" onClick="copy_normal_result()"><br>
-                            <br>
-                            <table class="prob_input">
-                                <tr>
-                                    <th style="height:32px;" colspan="2">　</th>
-                                    <th>1st</th>
-                                    <th>2nd</th>
-                                    <th>3rd</th>
-                                    <th>EX</th>
-                                    <th>TOTAL</th>
-                                </tr>
-                                <tr>
-                                    <th rowspan="3">ダメージ</th>
-                                    <th>乱数1</th>
-                                    <td>
-                                        <input type="number" name="DMG_1st" min=0 value=0></input>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="DMG_2nd" min=0 value=0></input>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="DMG_3rd" min=0 value=0></input>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="DMG_Ex" min=0 value=0></input>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="DMG_total"></output>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>固定ダメージ</th>
-                                    <td>
-                                        <input type="number" name="buff_1st" value=0></input>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="buff_2nd" value=0></input>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="buff_3rd" value=0></input>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="buff_Ex" value=0></input>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="buff_total"></output>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <br>
-                            　　<input type="button" class="button" value="計算" onClick="keisan_prob()">
-                            <!-- 　　<input type="reset" class="button" value="リセット"> -->
-
-                            <br><br>
-                            撃破率：<output type="number" name="prob_result" style="vertical-align: middle;"></output>
-                        </div>　　
-                    </form>
-                </div>
-
-                <div class="rate" id="rate">
-                    <h2>NP・スター 計算</h2>
-                    <br>
-                    <form name="rate">
-                        <div class="rate_data">
-                            NP獲得率 N/A：<input type="number" name="N_A" min="0" step="0.1" style="width:50px;">％<br>
-                            NP獲得量 バフ：<input type="number" name="getNP_buff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            スター発生率：<input type="number" name="Star_rate" min="0" step="0.1" style="width:50px;">％<br>
-                            スター発生率 バフ：<input type="number" name="getStar_buff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            Quickヒット数：<input type="number" name="Q_hit" value="1" min="0" step="1"
-                                style="width:40px;">Hit<br>
-                            Artsヒット数：<input type="number" name="A_hit" value="1" min="0" step="1"
-                                style="width:40px;">Hit<br>
-                            Busterヒット数：<input type="number" name="B_hit" value="1" min="0" step="1"
-                                style="width:40px;">Hit<br>
-                            EXヒット数：<input type="number" name="EX_hit" value="1" min="0" step="1"
-                                style="width:40px;">Hit<br>
-                            Quickカード バフ：<input type="number" name="Q_CARDbuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            Artsカード バフ：<input type="number" name="A_CARDbuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            Busterカード バフ：<input type="number" name="B_CARDbuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            EXカード バフ：<input type="number" name="EX_CARDbuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            Qカード耐性 デバフ：<input type="number" name="Q_CARDdebuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            Aカード耐性 デバフ：<input type="number" name="A_CARDdebuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            Bカード耐性 デバフ：<input type="number" name="B_CARDdebuff" value="0" min="0" step="1"
-                                style="width:50px;">％<br>
-                            宝具カード：<select name="NPcard" class="card">
-                                <option value="Q">Quick</option>
-                                <option value="A">Arts</option>
-                                <option value="B">Buster</option>
-                            </select><br>
-                            宝具ヒット数：<input type="number" name="NP_hit" value="1" min="0" step="1"
-                                style="width:40px;">Hit<br>
-                            NP 敵補正：<input type="number" name="enemy_rate_NP" value="100" min="0" step="10"
-                                style="width:50px;">％<br>
-                            スター 敵補正：<input type="number" name="enemy_rate_Star" value="0" step="5"
-                                style="width:50px;">％<br>
-                        </div>
-
-                        <div class="NP_Star">
-                            <table class="rate_result">
-                                <tr>
-                                    <th style="height:32px" colspan="2"></th>
-                                    <th>1st</th>
-                                    <th>2nd</th>
-                                    <th>3rd</th>
-                                    <th>EX</th>
-                                </tr>
-                                <tr>
-                                    <th style="height:40px" colspan="2">カード</th>
-                                    <th>
-                                        <select name="card_1st" class="card">
-                                            <option value="Q">Quick</option>
-                                            <option value="A">Arts</option>
-                                            <option value="B">Buster</option>
-                                            <option value="T">宝具</option>
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <select name="card_2nd" class="card">
-                                            <option value="Q">Quick</option>
-                                            <option value="A">Arts</option>
-                                            <option value="B">Buster</option>
-                                            <option value="T">宝具</option>
-                                        </select>
-                                    </th>
-                                    <th>
-                                        <select name="card_3rd" class="card">
-                                            <option value="Q">Quick</option>
-                                            <option value="A">Arts</option>
-                                            <option value="B">Buster</option>
-                                            <option value="T">宝具</option>
-                                        </select>
-                                    </th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th style="height:40px" colspan="2">オーバーキル数</th>
-                                    <th>
-                                        <input type="number" name="OK_1st" value="0" min="0" step="1"
-                                            style="width:40px;">Hit<br>
-                                    </th>
-                                    <th>
-                                        <input type="number" name="OK_2nd" value="0" min="0" step="1"
-                                            style="width:40px;">Hit<br>
-                                    </th>
-                                    <th>
-                                        <input type="number" name="OK_3rd" value="0" min="0" step="1"
-                                            style="width:40px;">Hit<br>
-                                    </th>
-                                    <th>
-                                        <input type="number" name="OK_EX" value="0" min="0" step="1"
-                                            style="width:40px;">Hit<br>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2" style="width:130px;">通常</th>
-                                    <th style="width:100px;">NP獲得量</th>
-                                    <td>
-                                        <output type="number" name="NP_1st"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_2nd"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_3rd"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_EX"></output>％
-                                    </td>
-                                </tr>
-                                <tr class="Star">
-                                    <th>スター獲得量</th>
-                                    <td>
-                                        <output type="number" name="Star_1st"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_2nd"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_3rd"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_EX"></output>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2">クリティカル</th>
-                                    <th>NP獲得量</th>
-                                    <td>
-                                        <output type="number" name="NP_1st_Cri"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_2nd_Cri"></output>％
-                                    </td>
-                                    <td>
-                                        <output type="number" name="NP_3rd_Cri"></output>％
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr class="Star">
-                                    <th>スター獲得量</th>
-                                    <td>
-                                        <output type="number" name="Star_1st_Cri"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_2nd_Cri"></output>
-                                    </td>
-                                    <td>
-                                        <output type="number" name="Star_3rd_Cri"></output>
-                                    </td>
-                                    <td></td>
-                                </tr>
-
-
-                            </table><br>
-                            　　　　　　　　　　　　　　　　　　　　　　　<input type="button" class="button" value="計算"
-                                onClick="keisan_rate()">
-                            <!-- 　　<input type="reset" class="button" value="リセット"> -->
-                        </div>
-                    </form>
-                </div>
-
-                <details>
-                    <summary>β版機能</summary>
-                    <div class="detect_buff">
-                        <h2>バフ・乱数推定　<span style="font-size: smaller;">→<a
-                                    href="https://github.com/keinoda/fgocalc/#バフ乱数推定">使い方</a></span></h2>
-                        <br>
-
-                        <form name="detect_buff">
-                            <div class="detect_buff_input"></div>
-                            <a title="以下のバフを全て0にしたダメージを入力してください" style="color:#F00;
-                        text-decoration:underline;">基本ダメージ</a>：<input type="number" name="base_damage" value="0"
-                                min="0" step="1" width="95px;" display="inline-block;">　固定ダメージ：<input type="number"
-                                name="fixed_damage" value="0" min="0" step="1" width="95px;"
-                                display="inline-block;">　<input type="checkbox" name="Buster_start">
-                            <label for="Buster_start">B始動
-                                <select name="CARD_order" class="card">
-                                    <option value="0">1枚目</option>
-                                    <option value="1">2枚目</option>
-                                    <option value="2">3枚目</option>
-                                </select>
-                                <select name="CARD_type" class="card">
-                                    <option value="0">Buster</option>
-                                    <option value="1">Arts</option>
-                                    <option value="2">Quick</option>
-                                    <option value="3">宝具</option>
-                                </select>
-                                <br>実機ダメージ：<input type="number" name="actual_damage" value="0" min="0" step="1"
-                                    width="95px;" display="inline-block;"><br>
-                                <br>
-                                攻防バフ　：<input type="number" name="ATK_buff" min="0" step="10"
-                                    style="width:60px;">％　　<input type="checkbox" name="ATK_buff_smallsteps">
-                                <label for="ATK_buff_smallsteps">1%刻みで検索</label><br>
-                                カードバフ：<input type="number" name="CARD_buff" min="0" step="10"
-                                    style="width:60px;">％　　<input type="checkbox" name="CARD_buff_smallsteps">
-                                <label for="CARD_buff_smallsteps">1%刻みで検索</label><br>
-                                特攻バフ　：<input type="number" name="s_buff" min="0" step="10" style="width:60px;">％　　<input
-                                    type="checkbox" name="s_buff_smallsteps">
-                                <label for="s_buff_smallsteps">1%刻みで検索</label><br>
-                                特殊耐性　：<input type="number" name="sDEF" min="0" step="10" style="width:60px;">％　　<input
-                                    type="checkbox" name="sDEF_smallsteps">
-                                <label for="sDEF_smallsteps">1%刻みで検索</label><br>
-                                乱数　　　：<input type="number" name="randnum" min="0.900" max="1.099" step="0.001"
-                                    style="width:60px;">（0.900〜1.099）
-                                　　　　　　<input type="button" class="button" value="計算" onClick="detect_buff_main()">
-
-                                <br><br><textarea name="detect_result" cols="100" rows="10" readonly
-                                    style="left: 20px;"></textarea>
-                                </form>
-                    </div>　　
-
-                    <div class="damage_np_normal" id="damage_np_normal">
-                        <h2>宝具＆通常ダメージ計算</h2>
-                        <br>
-    
-                        <form name="DMG_np_normal" class="DMG_np_normal">
-                            <div class="DMG_np_normal_data">
-                                ATK：<input type="number" name="ATK_np_normal" min="0" step="500" style="width:60px;"><br>
-                                宝具倍率：<input type="number" name="NP_dmg_np_normal" min="0" step="50" style="width:50px;">％
-                                種類：<select name="NP_card_np_normal">
-                                    <option value="Quick">Quick</option>
-                                    <option value="Arts">Arts</option>
-                                    <option value="Buster" selected>Buster</option>
-                                </select><br>
-                                攻撃力 バフ：<input type="number" name="ATKbuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                Q バフ：<input type="number" name="Q_CARDbuff_np_normal" value="0" min="0" step="1"
-                                    style="width:40px;">％ クリバフ：<input type="number" name="Q_CARDCribuff_np_normal" value="0"
-                                    min="0" step="1" style="width:40px;">％<br>
-                                A バフ：<input type="number" name="A_CARDbuff_np_normal" value="0" min="0" step="1"
-                                    style="width:40px;">％ クリバフ：<input type="number" name="A_CARDCribuff_np_normal" value="0"
-                                    min="0" step="1" style="width:40px;">％<br>
-                                B バフ：<input type="number" name="B_CARDbuff_np_normal" value="0" min="0" step="1"
-                                    style="width:40px;">％ クリバフ：<input type="number" name="B_CARDCribuff_np_normal" value="0"
-                                    min="0" step="1" style="width:40px;">％<br>
-                                EXカード バフ：<input type="number" name="EXATKbuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                Qカード耐性 デバフ：<input type="number" name="Q_CARDdebuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                Aカード耐性 デバフ：<input type="number" name="A_CARDdebuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                Bカード耐性 デバフ：<input type="number" name="B_CARDdebuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                敵防御力 デバフ：<input type="number" name="DEFdebuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                クリティカル威力 バフ：<input type="number" name="Cribuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                特攻威力 バフ：<input type="number" name="sATKbuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                敵特防 デバフ：<input type="number" name="sDEFdebuff_np_normal" value="0" min="0" step="1"
-                                    style="width:50px;">％<br>
-                                宝具威力 バフ：<input type="number" name="NPbuff_np_normal" value="0" min="0" step="1" style="width:50px;">％<br>
-                                宝具〔特性〕特攻威力：<input type="number" name="sNPbuff1_np_normal" value="100" min="0" step="50"
-                                    style="width:50px;">％<br>
-                                宝具〔状態〕特攻威力：<input type="number" name="sNPbuff2_np_normal" value="100" min="0" step="50"
-                                    style="width:50px;">％<br>
-                                固定ダメージ：<input type="number" name="fixed_damage_np_normal" value="0" step="1"
-                                    style="width:50px;"><br>
-                                敵特殊耐性：<input type="number" name="sDEF_np_normal" value="0" min="-100" step="10"
-                                    style="width:50px;">％<br><br>
-                                クラス相性：
-                                <select name="class1_np_normal">
-                                    <option value="1.0">等倍</option>
-                                    <option value="2.0" selected>有利</option>
-                                    <option value="0.5">不利</option>
-                                    <option value="1.5">狂 有利</option>
-                                    <option value="1.5">分 有利</option>
-                                    <option value="1.5">詐 有利</option>
-                                    <option value="1.2">分→獣&#8546;</option>
-                                </select><br>
-                                属性相性：
-                                <select name="elemental_np_normal">
-                                    <option value="1.0" selected>等倍</option>
-                                    <option value="1.1">有利</option>
-                                    <option value="0.9">不利</option>
-                                </select><br>
-                                クラス補正：
-                                <select name="class2_np_normal">
-                                    <option value="1.0" selected>剣</option>
-                                    <option value="0.95">弓</option>
-                                    <option value="1.05">槍</option>
-                                    <option value="1.0">騎</option>
-                                    <option value="0.90">術</option>
-                                    <option value="0.90">殺</option>
-                                    <option value="1.10">狂</option>
-                                    <option value="1.0">盾</option>
-                                    <option value="1.10">裁定</option>
-                                    <option value="1.10">復讐</option>
-                                    <option value="1.0">分</option>
-                                    <option value="1.0">詐</option>
-                                    <option value="1.0">月・降</option>
-                                </select>
-                            </div>
-                            <div class="DMG_np_normal_result">
-                                <table class="DMG_np_normal_result">
-                                    <tr>
-                                        <th style="height:32px;" colspan="2">　</th>
-                                        <th>1st</th>
-                                        <th>2nd</th>
-                                        <th>3rd</th>
-                                        <th>EX</th>
-                                        <th>TOTAL</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="height:40px" colspan="2">カード</th>
-                                        <th>
-                                            <select name="card_1st_np_normal" class="card">
-                                                <option value="NP">宝具</option>
-                                                <option value="Q">Quick</option>
-                                                <option value="A">Arts</option>
-                                                <option value="B" selected>Buster</option>
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="card_2nd_np_normal" class="card">
-                                                <option value="NP">宝具</option>
-                                                <option value="Q">Quick</option>
-                                                <option value="A">Arts</option>
-                                                <option value="B" selected>Buster</option>
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="card_3rd_np_normal" class="card">
-                                                <option value="NP">宝具</option>
-                                                <option value="Q">Quick</option>
-                                                <option value="A">Arts</option>
-                                                <option value="B" selected>Buster</option>
-                                            </select>
-                                        </th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <th style="height:40px" colspan="2">クリティカル</th>
-                                        <th>
-                                            <select name="is_card_1st_Cri_np_normal" class="card">
-                                                <option value="N">なし</option>
-                                                <option value="Y">あり</option>
-                                                <option value="zero">ダメージ0</option>
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="is_card_2nd_Cri_np_normal" class="card">
-                                                <option value="N">なし</option>
-                                                <option value="Y">あり</option>
-                                                <option value="zero">ダメージ0</option>
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="is_card_3rd_Cri_np_normal" class="card">
-                                                <option value="N">なし</option>
-                                                <option value="Y">あり</option>
-                                                <option value="zero">ダメージ0</option>
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="is_card_Ex_Cri_np_normal" class="card">
-                                                <option value="N">なし</option>
-                                                <option value="zero">ダメージ0</option>
-                                            </select>
-                                        </th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="3" style="width:100px">ダメージ</th>
-                                        <th class="lowest">最低</th>
-                                        <td>
-                                            <output type="number" name="DMG_low_1st_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_low_2nd_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_low_3rd_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_low_EX_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_low_total_np_normal"></output>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>平均</th>
-                                        <td>
-                                            <output type="number" name="DMG_ave_1st_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_ave_2nd_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_ave_3rd_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_ave_EX_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_ave_total_np_normal"></output>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="highest">最高</th>
-                                        <td>
-                                            <output type="number" name="DMG_high_1st_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_high_2nd_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_high_3rd_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_high_EX_np_normal"></output>
-                                        </td>
-                                        <td>
-                                            <output type="number" name="DMG_high_total_np_normal"></output>
-                                        </td>
-                                </table>
-    
-                                <br><br>
-                                　　<input type="button" class="button" value="計算" onClick="keisan_DMG_np_normal(0)">
-                                　　<input type="button" class="button" value="計算(小数)" style="width:80px;"
-                                    onClick="keisan_DMG_np_normal(4)">
-                                　　<input type="button" class="button" value="バフ保存" onClick="buff_save()">
-                                　　<input type="button" class="button" value="バフ復元" onClick="buff_load()">
-                            </div>
-                        </form>
-                    </div>
-                </details>
             </div>
         </div>
     </div>
